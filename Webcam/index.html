@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="boss">
+    <div class="heading">
+        <h1>Verify Your Image</h1>
+    </div>
+    <div class="main">
+        <div class="sub">
+    <!-- Streaming video wth webcam -->
+    <div class="video-wrap">
+        <video id="video" playsinline autoplay></video>
+    </div>
+
+<!-- Trigger canvas wev API -->
+    <div class="controller">
+        <button id="snap">Capture</button>
+    </div>
+    </div>
+    <div class="cap">
+<!-- Webcam video snapshot -->
+    <canvas id="canvas" width="640" height="480"></canvas>
+</div>
+</div>
+</div>
+    <script>
+        'use strict';
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const snap = document.getElementById('snap');
+        const errorMsgElement = document.getElementById('snap#ErrorMsg');
+
+        const constraints = {
+            audio : true,
+            video:{
+                width: 1000, height : 720
+            }
+        };
+
+        async function init(){
+            try{
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                handleSuccess(stream);
+
+            }
+            catch(e){
+                errorMsgElement.innerHTML = 'navigator.getUserMedia.erroe:${e.toString()}';
+            }
+        }
+
+        function handleSuccess(stream){
+            window.stream = stream;
+            video.srcObject  = stream;
+        }
+
+        init();
+
+        var context = canvas.getContext('2d');
+        snap.addEventListener('click', function(){
+            context.drawImage(video, 0,0,640, 480);
+        });
+    </script>
+</body>
+</html>
