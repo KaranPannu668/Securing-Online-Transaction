@@ -50,7 +50,7 @@ section .contentbox{
 section .contentbox h1{
     display:inline-block;
     position:relative;
-    top: -70px;
+    top: -10%;
     font-size: 2.2em;
     text-transform: uppercase;
     letter-spacing: 1px;
