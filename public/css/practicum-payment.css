@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+img{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+section{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    padding: 40px 285px ;
+    background:linear-gradient(120deg,#06b9e6b0,#03c4f4c9,#04bea5c9,#0388f4d0) ;
+}
+section .contentbox{
+    background-color: rgba(255, 255, 255, 0.89);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+section .contentbox h1{
+    display:inline-block;
+    position:relative;
+    top: -7%;
+    font-size: 2.2em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(190deg,#015dd6,#03c4f4,#1ed1e9,#0388f4);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+section .contentbox .formbox{
+    width: 50%;
+}
+section .contentbox .formbox h2{
+    color: #607d8b;
+    font-weight: 600;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #05d644;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+section .contentbox .formbox .inputbox{
+    margin-top: 20px;
+}
+section .contentbox .formbox .inputbox span{
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: #607d8b;
+    font-weight: 300;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+section .contentbox .formbox .inputbox input{
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    font-weight: 400;
+    border: 1px solid #607d8b;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #607d8b;
+    background: transparent;
+    border-radius: 30px;
+}
+
+section .contentbox .formbox .inputbox input[type="submit"]{
+    background: #05d644;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+section .contentbox .formbox .inputbox input[type="submit"]:hover{
+    background-color: #1af15b;
+}
+section .contentbox .formbox .remember{
+    margin-top: 10px;
+    color: #607d8b;
+    font-weight: 400;
+    font-size: 14px;
+}
+section .contentbox .formbox p{
+    color: #607d8b;
+}
+section .contentbox .formbox p a{
+    color: #45c4ff;
+}
+
+@media (max-width: 768px){
+    section{
+        padding: 30px;
+    }
+    section .contentbox h1{
+        display: none;
+    }
+    section .imgbox{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+    }
+    section .contentbox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    section .contentbox .formbox{
+        width: 100%;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.884);
+    }
+}
