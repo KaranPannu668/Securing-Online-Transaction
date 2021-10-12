@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="practicum-payment.css">
+    <link rel="stylesheet" href="css/practicum-payment.css">
     <title>Document</title>
 </head>
 <body>
-    <img src="pc.jpg" alt="">
+    <img src="images/pc.jpg" alt="">
     <section>
         <div class="contentbox">
             <h1>H.A.K Banking</h1>
             <div class="formbox">
                 <h2>Payment Gateway</h2>
-                <form action="">
+                <form action="/payment" method="post">
                     <div class="inputbox">
                         <span>Pay to:</span>
-                        <input type="text" name="" id="" placeholder="Account Name" required></div>
+                        <input type="text" name="Acc_name" id="" placeholder="Account Name" required></div>
                     <div class="inputbox">
                         <span>Account Number</span>
-                        <input type="number" name="" id="" placeholder="Account Number of receiver" required>
+                        <input type="number" name="Acc_no" id="" placeholder="Account Number of receiver" required>
                     </div>
                     <div class="inputbox">
                         <span>IFSC Code</span>
-                        <input type="number" name="" id="" placeholder="Eleven digit IFSC code" required>
+                        <input type="number" name="IFSC" id="" placeholder="Eleven digit IFSC code" required>
                     </div>
                         <div class="inputbox">
                             <span>Amount</span>
-                            <input type="number" name="" id="" placeholder="In digits only" required></div>
+                            <input type="number" name="amount" id="" placeholder="In digits only" required></div>
             
                     <div class="inputbox">
                         <input type="submit" value="Confirm Payment">

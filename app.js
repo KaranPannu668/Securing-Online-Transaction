@@ -24,7 +24,7 @@ app.post("/", async function(req, res){
     let password=req.body.Password;
     var valid= await google_sheets.verify(username, password);
     if(valid==1)
-    res.redirect("/photo-verify");
+    res.redirect("/payment");
     else
     res.redirect("/");
 
@@ -33,8 +33,22 @@ app.post("/", async function(req, res){
 
 
 
-app.get("/photo-verify", function(req, res){
-    res.send("You're in!");
+app.get("/payment", function(req, res){
+    res.sendFile(__dirname+"/practicum-payment.html");
+});
+
+
+app.post("/payment", function(req, res){
+    let acc_name=req.body.Acc_name;
+    let acc_no=req.body.Acc_no;
+    let IFSC=req.body.IFSC;
+    let amount=req.body.amount;
+    res.redirect("/webcam");
+});
+
+
+app.get("/webcam", function(req, res){
+    res.sendFile(__dirname+"/Webcam/webcam.html");
 });
 
 
@@ -43,7 +57,7 @@ app.get("/practicum-signup.html", function(req, res){
 });
 
 
-app.post("/practicum-signup.html", async function(req, res){
+app.post("/sign-up", async function(req, res){
     const uname=req.body.Username;
     const pword=req.body.Password;
     const email=req.body.Email;
