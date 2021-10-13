@@ -3,9 +3,11 @@
     margin: 0;
     box-sizing: border-box;
     color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 body{
-    background: url('https://freerangestock.com/sample/129733/gradient-background.jpg');
+    background: white;
     background-size: cover;
 }
 
@@ -29,8 +31,18 @@ body{
 
 .heading{
     /* align-items: center; */
+    width: 95%;
     padding: 20px 40px;
     text-align: center;
+    background: -webkit-linear-gradient(190deg,#015dd6,#03c4f4,#1ed1e9,#0388f4);
+    /* background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    /* -webkit-box-shadow: 1px 13px 28px 3px rgba(0,0,0,0.78); 
+box-shadow: 1px 13px 28px 3px rgba(0,0,0,0.78); */
+border-bottom-left-radius: 30px;
+border-bottom-right-radius: 30px;
+
 }
 
 .sub{
@@ -55,8 +67,9 @@ body{
 #video{
     /* align-items: center; */
     width: 80%;
-    border-radius: 5%;
-    border: 5px solid white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82); 
+    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82);
     
 
 }
@@ -71,10 +84,12 @@ body{
 #snap, #send{
     padding: 10px 40px;
     color: white;
-    background-color: black;
+    background: linear-gradient(225deg,#1ee9b6de,#0388f4d3);
     margin-bottom: 0;
     outline: none;
     border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }
 /* #snap{
     margin-top: 50px;
@@ -85,9 +100,10 @@ body{
 /* } */
 
 #canvas{
-    border-radius: 5%;
+    border-radius: 5px;
 
-    border: 5px solid white;
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82); 
+    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82);
     /* height: 75%; */
 }
 
