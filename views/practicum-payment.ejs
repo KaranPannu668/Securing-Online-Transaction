@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/practicum-payment.css">
+    <title>Document</title>
+</head>
+<body>
+    <img src="images/pc.jpg" alt="">
+    <section>
+        <div class="contentbox">
+            <h1>H.A.K Banking</h1>
+            <div class="formbox">
+                <h2>Payment Gateway</h2>
+                <form action="/payment" method="post">
+                    <div class="inputbox">
+                        <span>Pay to:</span>
+                        <input type="text" name="Acc_name" id="" placeholder="Account name" required value=<%=acc_name_p%>></div>
+                    <div class="inputbox">
+                        <span>Account Number</span><span style="color: red;"><%=err_msg_no_p%></span>
+                        <input type="number" name="Acc_no" id="" placeholder="Account number of receiver" required value=<%=acc_no_p%>>
+                    </div>
+                    <div class="inputbox">
+                        <span>IFSC Code</span><span style="color: red;"><%=err_msg_code_p%></span>
+                        <input type="text" name="IFSC" id="" placeholder="Eleven char IFSC code" required value=<%=IFSC_p%>>
+                    </div>
+                        <div class="inputbox">
+                            <span>Amount</span>
+                            <input type="number" name="amount" id="" placeholder="In digits only" required value=<%=amount_p%>></div>
+            
+                    <div class="inputbox">
+                        <input type="submit" value="Confirm Payment">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

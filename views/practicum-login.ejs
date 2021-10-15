@@ -14,22 +14,23 @@
         </div>
         <div class="contentbox">
             <h1>H.A.K Banking</h1>
+            <span style="color: red;"><%=err_msg_l%></span>
             <div class="formbox">
                 <h2>Login</h2>
                 <form action="/" method="POST">
                     <div class="inputbox">
                         <span>Username</span>
-                        <input type="text" name="Username" id=""></div>
+                        <input type="text" name="Username" id="" required></div>
                     <div class="inputbox">
                         <span>Password</span>
-                        <input type="password" name="Password" id=""></div>
+                        <input type="password" name="Password" id="" required></div>
                     <div class="remember">
                             <label><input type="checkbox" name="remember" id="">Remember Me</label></div>
                     <div class="inputbox">
                         <input type="submit" value="Sign In">
                     </div>
                     <div class="inputbox">
-                        <p>Don't have an account? <a href="practicum-signup.html">Sign up</a></p>
+                        <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
                     </div>
                 </form>
             </div>

@@ -14,18 +14,19 @@
         </div>
         <div class="contentbox">
             <h1>H.A.K Banking</h1>
+            <span style="color: red;"><%=err_msg_s%></span>
             <div class="formbox">
                 <h2>Sign Up</h2>
-                <form action="/practicum-signup.html" method="POST">
+                <form action="/sign-up" method="POST">
                     <div class="inputbox">
                         <span>Username</span>
-                        <input type="text" name="Username" id=""></div>
+                        <input type="text" name="Username" id="" required value=<%=uname_s%>></div>
                     <div class="inputbox">
                         <span>Password</span>
-                        <input type="password" name="Password" id=""></div>
+                        <input type="password" name="Password" id="" required value=<%=pword_s%>></div>
                         <div class="inputbox">
                             <span>Email Id</span>
-                            <input type="email" name="Email" id=""></div>
+                            <input type="email" name="Email" id="" required value=<%=email_s%>></div>
             
                     <div class="inputbox">
                         <input type="submit" value="Sign Up">
