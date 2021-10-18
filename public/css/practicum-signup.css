@@ -72,6 +72,7 @@ section .contentbox .formbox h2{
     border-bottom: 4px solid #05d644;
     display: inline-block;
     letter-spacing: 1px;
+    /* text-align: center; */
 }
 section .contentbox .formbox .inputbox{
     margin-top: 20px;
