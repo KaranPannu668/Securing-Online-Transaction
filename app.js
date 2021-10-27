@@ -2,6 +2,7 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 const {google}=require("googleapis");
+const bcrypt = require("bcryptjs");
 
 const app=express();
 app.set("view engine", "ejs");
@@ -9,6 +10,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 const google_sheets=require(__dirname+"/views/google-sheets.js");
+require(__dirname+"/db/conn.js");
+const Register = require(__dirname+"/models/registers");
 
 var err_msg_l="";
 var err_msg_s="";
@@ -24,7 +27,7 @@ var amount="";
 
 app.get("/", function(req, res){
     
-    err_msg_l="";
+    // err_msg_l="";
     err_msg_s="";
     err_msg_no_p="";
     err_msg_code_p="";
@@ -44,14 +47,26 @@ app.post("/", async function(req, res){
     err_msg_l="";
     let username=req.body.Username;
     let password=req.body.Password;
-    var valid= await google_sheets.verify(username, password);
+
+    const user_usrename = await Register.findOne({username: username});
+
+    const isMatch = await bcrypt.compare(password, user_usrename.password)
+
+    if(isMatch){
+        res.status(201).redirect("/payment");
+    }else{
+        err_msg_l="*Wrong Username or Password";
+        res.redirect("/");
+    }
+
+    /*var valid= await google_sheets.verify(username, password);
     if(valid==1)
     res.redirect("/payment");
     else
     {
         err_msg_l="*Wrong Username or Password";
         res.redirect("/");
-    }
+    }*/
 
 });
 
@@ -98,6 +113,7 @@ app.get("/sign-up", function(req, res){
 
 
 app.post("/sign-up", async function(req, res){
+    try{
     err_msg_s="";
     uname=req.body.Username;
     pword=req.body.Password;
@@ -121,9 +137,23 @@ app.post("/sign-up", async function(req, res){
         res.redirect("/sign-up");
     }
     else{
-        google_sheets.append(uname, pword, email);
-    res.redirect("/");
-    }
+        //google_sheets.append(uname, pword, email);
+
+        
+            const registerUser = new Register({
+                username : uname,
+                password : pword,
+                email : email
+            })
+
+            const registered = await registerUser.save();
+            res.status(201).redirect("/");
+
+
+        }
+    }catch(error){
+            res.status(400).send(error);
+        }
     
 });
 
