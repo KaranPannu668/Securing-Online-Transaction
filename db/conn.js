@@ -14,5 +14,4 @@ mongoose.connect("mongodb+srv://Credentials:CrEd%5FPsSwRd.@cluster0.osuy6.mongod
         console.log("Connection unsuccessful"+e);
     })
 
-    // CrEd_PsSwRd.
-    // mongo "mongodb+srv://cluster0.osuy6.mongodb.net/myFirstDatabase" --username Credentials
+    
