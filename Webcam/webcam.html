@@ -1,83 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verification</title>
-    <link rel="stylesheet" href="css/webcam.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
-    
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/webcam.css" />
+
+    <title>Webcam</title>
+</head>
+<body>
     <div class="boss">
-      <div class="heading">
-        <h1>Verify Your Image</h1>
-        <p>A Verification Mail will be sent on the Registered Email</p>
-      </div>
-      <div class="main">
-        <div class="sub">
-          <!-- Streaming video wth webcam -->
-
-          <div class="video-wrap">
-            <video id="video" playsinline autoplay></video>
-          </div>
-
-          <!-- Trigger canvas wev API -->
-          <div class="controller">
-            <button id="snap">Capture</button>
-          </div>
-        </div>
-        <div class="sub">
-          <div class="cap">
-            <!-- Webcam video snapshot -->
-            <canvas id="canvas" width="530" height="360"></canvas>
-          </div>
-          <div class="controller">
-            <!-- <button download id="send">Send</button> -->
-            <a download id="send">Send</a>
-          </div>
-        </div>
-      </div>
+        <div class="heading">
+            <h1>Verify Your Image</h1>
+            <p>A Verification Mail will be sent on the Registered Email</p>
+          </div> 
     </div>
-    <script>
-      "use strict";
-      const video = document.getElementById("video");
-      const canvas = document.getElementById("canvas");
-      const snap = document.getElementById("snap");
-      const errorMsgElement = document.getElementById("snap#ErrorMsg");
+    <div class="main">
+        <div class="sub">
+            <div id="video-wrap">
+                <video autoplay="true" width="700" height="400" id="video">
+                </video>
+                <div id="controller">
+                <button id="cap" onclick="capture()">Capture</button>
+            </div>
+            </div>
+        </div>
+        <div class="sub">
+            <div class="cap">
+                <canvas id="canvas" style="overflow:auto"></canvas>
 
-      const constraints = {
-        audio: false,
-        video: {
-          width: 990,
-          height: 675,
-        },
-      };
-
-      async function init() {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia(constraints);
-          handleSuccess(stream);
-        } catch (e) {
-          errorMsgElement.innerHTML =
-            "navigator.getUserMedia.erroe:${e.toString()}";
-        }
-      }
-
-      function handleSuccess(stream) {
-        window.stream = stream;
-        video.srcObject = stream;
-      }
-
-      init();
-
-      var context = canvas.getContext("2d");
-      snap.addEventListener("click", function () {
-        context.drawImage(video, 0, 0, 530, 360);
-      });
+            </div>
+            <div class="controller">
+                <form action="/" method="POST"><div style="display: none;">
+                    Username: <input type="text" id="img64capture" name="Username" value=""></div>
+                   <input id="cap-1" type="submit" value="Submit">
+                 </form>
+            </div>
+        </div>
+    </div>
+    
+      
+  <script>
+    var video = document.querySelector("#video");
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+          console.log("Something went wrong!");
+        });
+    }
+    function capture() {
+      var canvas = document.getElementById('canvas');     
+      var video = document.getElementById('video');
+      canvas.width = 500;
+      canvas.height = 400;
+      canvas.getContext('2d').drawImage(video, 0, 0, 500,400);  
+      document.getElementById("img64capture").value = canvas.toDataURL();
+      //document.getElementById("printresult").innerHTML = canvas.toDataURL();
+    }
     </script>
-  </body>
+</body>
 </html>
