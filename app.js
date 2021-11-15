@@ -5,6 +5,10 @@ const {google}=require("googleapis");
 const bcrypt = require("bcryptjs");
 
 const app=express();
+
+app.use(bodyParser.json({limit: "10mb"}));
+app.use(bodyParser.urlencoded({limit: "10mb", extended: true, parameterLimit:50000}));
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
@@ -105,6 +109,11 @@ app.post("/payment", function(req, res){
 app.get("/webcam", function(req, res){
     res.sendFile(__dirname+"/Webcam/webcam.html");
 });
+
+app.post("/webcam", function(req, res){
+    var img64 = req.body.Image64bit;
+    res.send(img64);
+})
 
 
 app.get("/sign-up", function(req, res){

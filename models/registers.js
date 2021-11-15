@@ -16,6 +16,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    History: [
+        {
+            image: {
+                type: Buffer
+            }
+        }
+    ]
 })
 
 
