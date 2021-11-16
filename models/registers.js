@@ -14,15 +14,11 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
+        required: true
     },
-    History: [
-        {
-            image: {
-                type: Buffer
-            }
-        }
-    ]
+    amount: {
+        type: Number
+    }
 })
 
 
@@ -35,4 +31,42 @@ userSchema.pre("save", async function(next){
 
 const Register = new mongoose.model("Register", userSchema);
 
-module.exports = Register;
+async function Updatepassword(_id, newpassword){
+    let result;
+    
+    try{
+            result = await Register.findByIdAndUpdate({_id}, {$set: {password: await bcrypt.hash(newpassword, 10)}} , {new: true, useFindAndModify: false});
+           console.log(result);
+           if(result)
+            return 1;
+            else
+            return -1;
+        }catch(err){
+            if(result)
+            return 1;
+            else
+            return -1;
+        }
+}
+
+async function UpdateAmount(_id, amount){
+    let result_amount;
+    
+    try{
+            result_amount = await Register.findByIdAndUpdate({_id}, {$set: {amount : amount }} , {new: true, useFindAndModify: false});
+           if(result_amount)
+            return 1;
+            else
+            return -1;
+        }catch(err){
+            if(result_amount)
+            return 1;
+            else
+            return -1;
+        }
+}
+
+
+
+
+module.exports = {Register , Updatepassword , UpdateAmount};

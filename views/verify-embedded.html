@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+a{
+    background-color: #45c4ff;
+    border: none;
+    color: white;
+    padding: 0.2vw 1.5vw;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5vw;
+
+}
+
+section{
+    position: relative;
+    padding: 40px;
+    background-color:#607d8b44 ;
+}
+.contentbox{
+    background-color: #fff;
+    padding: 30px;
+}
+.contentbox h2{
+    text-align: center;
+    font-size: 1.5rem;
+    border-bottom: 4px solid #45c4ff;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    color: #607d8b;
+}
+.contentbox .imgbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contentbox .imgbox img{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 40vw;
+    object-fit: contain;
+}
+.contentbox .textbox{
+    padding: 40px;
+    font-size: 26px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+#amount, #receiver{
+    font-weight: 700;
+}
+
+.contentbox .radiobox{
+    font-size: 20px;
+    padding-top: 40px;
+    /* color: #607d8b; */
+}
+.contentbox .radiobox input{
+    margin-top: 15px;
+}
+
+.contentbox .radiobox input[type="submit"]{
+    background: #45c4ff;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px;
+    width: 12%;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+.contentbox .radiobox input[type="submit"]:hover{
+    background-color: #02adfc;
+    letter-spacing: 2px;
+}
+@media (max-width: 1100px){
+    section .contentbox .textbox{
+        flex-direction: column;
+    }
+}
+@media (max-width: 900px){
+    .contentbox .radiobox input[type="submit"]{
+        width: 100%;
+    }
+}
+
+    </style>
+
+
+    <title>Verification</title>
+</head>
+<body>
+    <section>
+        <div class="contentbox">
+            <h2 style="font-size: 3.5vw;">Confirm Payment</h2>
+            <div class="textbox" style="font-size: 1.5vw; padding: 3vw; padding-bottom: 5vw;">
+                We received a transaction request from your account to transfer Rs. {{{amount}}} to account number ending with {{{account_no}}}, initiated by the person shown below. Please click on the link given below to verify the payment.
+                <!-- <p id="receiver">Harsh Bokan</p>
+                <p>&nbsp;is requesting you to transfer&nbsp;</p>    
+                <p id="amount">Rs.1,00,000</p>
+                <p>&nbsp;to his account!!</p> -->
+            </div>
+            <div class="imgbox" >
+                <img style="align-items: center; padding-top: 0; margin-top: 0; margin-bottom: 0; padding-bottom: 0;" alt="transactor-image" src="cid:imagename">
+                 </div>
+            <div class="radiobox" style="padding-top: 4vw;">
+           <!-- <a href="http://localhost:1337/verify{{{email_session_token}}}" type="submit"><span style="color: white;">Verify</span></a> -->
+           <form action="http://localhost:1337/verify-embedded" method="POST">
+               <input style="display: none;" type="text" name="token" value="{{{email_session_token}}}" >
+               <input type="submit" value="Verify">
+           </form>
+           </div>
+        </div>
+    </section>
+</body>
+</html>

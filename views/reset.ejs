@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <title>Reset Password</title>
+</head>
+<body>
+    <section>
+        <div class="contentbox">
+            <h1>Reset Password</h1>
+            <span style="color: red;"><%=error_msg_reset%></span>
+            <div class="formbox">
+                <form action="/reset" method="POST">
+                <div class="inputbox">
+                    <span>Old Password</span>
+                    <input type="password" name="Oldpassword" id="">
+                </div>
+                <div class="inputbox">
+                    <span>New Password</span>
+                    <input type="password" name="Newpassword" id="">
+                </div>
+                <div class="inputbox">
+                    <span>Confirm Password</span>
+                    <input type="password" name="Confirmpassword" id="">
+                </div>
+                <div class="inputbox">
+                    <input type="submit" value="CONFIRM">
+                </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

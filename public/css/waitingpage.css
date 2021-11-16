@@ -1,4 +1,4 @@
-*{
+.full-waiting{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -6,14 +6,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.boss{
+.boss-waiting{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.heading{
+.heading-waiting{
     /* align-items: center; */
     width: 95%;
     padding: 20px 40px;
@@ -30,7 +30,7 @@ margin-top: -5px;
 margin-bottom: 20px;
 
 }
-.main{
+.main-waiting{
     /* width: 100%; */
     display: flex;
     justify-content: space-around;

@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/webcam.css" />
-
+    <link rel="stylesheet" href="css/waitingpage.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+      .hide{
+          display: none;
+      }
+  </style>
     <title>Webcam</title>
 </head>
-<body>
+<body><section class="full-webcam" id="webcam">
     <div class="boss">
         <div class="heading">
             <h1>Verify Your Image</h1>
@@ -37,9 +45,20 @@
                  </form>
             </div>
         </div>
+    </div></section>
+
+
+    <section class="full-waiting hide" id="waiting">
+      <div class="boss-waiting">
+        <div class="heading-waiting">
+            <h1>Mail Has Been Sent</h1>
+           
+          </div> 
     </div>
-    
-      
+    <div class="main-waiting">
+        <img src="https://i.gifer.com/QHTn.gif" alt="" height="50%" width="50%">
+    </div>
+    </section>
   <script>
     var video = document.querySelector("#video");
     if (navigator.mediaDevices.getUserMedia) {
@@ -58,8 +77,12 @@
       canvas.height = 400;
       canvas.getContext('2d').drawImage(video, 0, 0, 500,400);  
       document.getElementById("img64capture").value = canvas.toDataURL();
-      //document.getElementById("printresult").innerHTML = canvas.toDataURL();
     }
+
+    document.getElementById("cap-1").addEventListener('click' , function(){
+      document.getElementById("webcam").classList.toggle("hide");
+      document.getElementById("waiting").classList.toggle("hide");
+    })
     </script>
 </body>
 </html>
