@@ -99,6 +99,7 @@ app.post("/sign-up", async function(req, res){
     uname=req.body.Username;
     pword=req.body.Password;
     email=req.body.Email;
+    let isalreadytaken = await Register.Register.findOne({username : uname});
     if(uname.length<=6)
     {
         err_msg_s="*Username must be longer than 6 characters";
@@ -116,6 +117,11 @@ app.post("/sign-up", async function(req, res){
         err_msg_s="*Invalid email address";
         email="";
         res.redirect("/sign-up");
+    }
+    else if(isalreadytaken != null)
+    {
+        err_msg_s = "*This username is already taken.";
+        res.redirect("/sign-up")
     }
     else{
             const registerUser = new Register.Register({
