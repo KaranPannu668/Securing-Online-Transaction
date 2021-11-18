@@ -13,12 +13,11 @@ const sendEmail = require(__dirname + "/views/email.js");
 const generateToken = require(__dirname + "/views/token.js");
 
 const app=express();
-//port 
-const port = process.env.PORT;
-if(port == null || port == "")
-{
-    port = 1337;
-}
+const port = process.env.PORT || 1337;
+// if(port == null || port == "")
+// {
+//     port = 1337;
+// }
 
 
 app.use(bodyParser.json({limit: "10mb"}));
@@ -52,6 +51,7 @@ let secret_session_token = "";
 let payment_secret_token = generateToken(50);
 let payment_status_token = "";
 let received_email_token = "";
+let email_verify_port = "";
 
 
 
@@ -244,7 +244,8 @@ app.post("/webcam", async function(req, res){
         img64 = req.body.Image64bit;
         secret_session_token = generateToken(100);
         payment_secret_token = generateToken(100);
-        sendEmail(img64, user_username.email , amount , acc_no.substring(acc_no.length - 4) , secret_session_token);
+        email_verify_port = req.protocol + "://" + req.get('host') + "/verify?id=" + secret_session_token;
+        sendEmail(img64, user_username.email , amount , acc_no.substring(acc_no.length - 4) , email_verify_port);
         var a = 0;
         while(a<=360)
         {
@@ -295,18 +296,19 @@ app.post("/webcam", async function(req, res){
 })
 
 
-app.post("/verify-embedded" , function(req, res){
-    received_email_token = req.body.token;
-    if(received_email_token == secret_session_token)
-    res.redirect("http://hak-banking.herokuapp.com/verify");
-    else
-    res.redirect("http://hak-banking.herokuapp.com/expired");
-})
+// app.post("/verify-embedded" , function(req, res){
+//     received_email_token = req.body.token;
+//     if(received_email_token == secret_session_token)
+//     res.redirect("localhost:1337/verify");
+//     else
+//     res.redirect("localhost:1337/expired");
+// })
 
 
 
 app.get("/verify" , function(req, res){
-    if(received_email_token == secret_session_token)
+    received_email_token = req.query.id;
+    if(req.query.id == secret_session_token)
     {
         res.render("verify" , {transactor_image : img64 , amount : amount , account_no : acc_no.substring(acc_no.length - 4)});
     }
@@ -319,9 +321,16 @@ app.post("/verify" , function(req, res){
     if(received_email_token == secret_session_token)
     {
        let status=req.body.verification;
-    if(status == "1" || status == "0")
+    if(status == "1")
     {
         payment_status_token = payment_secret_token;
+        secret_session_token = generateToken(100);
+        received_email_token = "";
+        res.redirect("/confirmed");
+    }
+    else if(status == "0")
+    {
+        payment_status_token = "--------------------";
         secret_session_token = generateToken(100);
         received_email_token = "";
         res.redirect("/confirmed");
@@ -336,7 +345,9 @@ app.post("/verify" , function(req, res){
     }
     }
     else
-    res.redirect("/expired");
+    {
+        res.redirect("expired");
+    }
 });
 
 app.get("/success", function(req, res){

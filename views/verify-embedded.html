@@ -141,11 +141,11 @@ cursor: pointer;
                 <img class="image" alt="transactor-image" src="cid:imagename">
                  </div>
             <div class="radiobox" style="padding-top: 4vw;">
-           <!-- <a href="http://localhost:1337/verify{{{email_session_token}}}" type="submit"><span style="color: white;">Verify</span></a> -->
-           <form action="http://hak-banking.herokuapp.com/verify-embedded" method="POST">
+           <a href="{{{email_session_token}}}" target="_blank"><span style="color: white;">Verify</span></a>
+           <!-- <form action="http://localhost:1337/verify-embedded" method="POST">
                <input style="display: none;" type="text" name="token" value="{{{email_session_token}}}" >
                <input type="submit" value="Verify" class="btn">
-           </form>
+           </form> -->
            </div>
         </div>
     </section>

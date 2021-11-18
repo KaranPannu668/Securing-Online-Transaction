@@ -15,7 +15,7 @@ const readHTMLFile = function(path, callback) {
     });
   };
 
-const sendEmail = (img_64 , user_email , amount , account_no , secret_session_token) => {
+const sendEmail = (img_64 , user_email , amount , account_no , secret_session_token ) => {
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
