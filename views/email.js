@@ -19,8 +19,8 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.SENDER_EMAIL,
-          pass: process.env.SENDER_PASSWORD
+          user: "hakbanking091126@gmail.com",
+          pass: "12011009_11_26"
         }
       });
     readHTMLFile(
