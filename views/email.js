@@ -1,5 +1,4 @@
 
-require('dotenv').config();
 var nodemailer=require('nodemailer');
 var fs=require('fs');
 const handlebars = require("handlebars");
@@ -20,8 +19,8 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: ENV['SENDEREMAIL'],
-          pass: ENV['SENDERPASSWORD']
+          user: "hakbanking091126@gmail.com",
+          pass: "12011009_11_26"
         }
       });
     readHTMLFile(
@@ -35,7 +34,7 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
          };
         var htmlToSend = template(replacements);
         var mailOptions = {
-          from: ENV['SENDEREMAIL'],
+          from: "hakbanking091126@gmail.com",
           to: user_email,
           subject: "Verify your online payment",
           attachments: [
