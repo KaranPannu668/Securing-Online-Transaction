@@ -13,6 +13,7 @@ const sendEmail = require(__dirname + "/views/email.js");
 const generateToken = require(__dirname + "/views/token.js");
 
 const app=express();
+//port 
 const port = process.env.PORT;
 if(port == null || port == "")
 {
