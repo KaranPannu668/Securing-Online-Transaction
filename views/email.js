@@ -1,5 +1,5 @@
 
-
+require('dotenv').config();
 var nodemailer=require('nodemailer');
 var fs=require('fs');
 const handlebars = require("handlebars");
