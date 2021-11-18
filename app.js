@@ -13,11 +13,11 @@ const sendEmail = require(__dirname + "/views/email.js");
 const generateToken = require(__dirname + "/views/token.js");
 
 const app=express();
-const port = process.env.PORT || 1337;
-// if(port == null || port == "")
-// {
-//     port = 1337;
-// }
+const port = process.env.PORT;
+if(port == null || port == "")
+{
+    port = 1337;
+}
 
 
 app.use(bodyParser.json({limit: "10mb"}));

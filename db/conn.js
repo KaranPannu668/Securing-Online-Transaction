@@ -1,6 +1,7 @@
+
 const mongoose = require("mongoose");
 
-mongoose.connect(env['MONGOATLAS'],{
+mongoose.connect(ENV['MONGOATLAS'],{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //useCreateIndex: true,

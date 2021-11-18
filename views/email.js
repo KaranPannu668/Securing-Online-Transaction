@@ -20,8 +20,8 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: env['SENDEREMAIL'],
-          pass: env['SENDERPASSWORD']
+          user: ENV['SENDEREMAIL'],
+          pass: ENV['SENDERPASSWORD']
         }
       });
     readHTMLFile(
@@ -35,7 +35,7 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
          };
         var htmlToSend = template(replacements);
         var mailOptions = {
-          from: env['SENDEREMAIL'],
+          from: ENV['SENDEREMAIL'],
           to: user_email,
           subject: "Verify your online payment",
           attachments: [
