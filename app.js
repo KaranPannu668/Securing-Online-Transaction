@@ -291,9 +291,9 @@ app.post("/webcam", async function(req, res){
 app.post("/verify-embedded" , function(req, res){
     received_email_token = req.body.token;
     if(received_email_token == secret_session_token)
-    res.redirect("http://localhost:1337/verify");
+    res.redirect("http://hak-banking.herokuapp.com/verify");
     else
-    res.redirect("http://localhost:1337/expired");
+    res.redirect("http://hak-banking.herokuapp.com/expired");
 })
 
 
