@@ -3,6 +3,7 @@
 var nodemailer=require('nodemailer');
 var fs=require('fs');
 const handlebars = require("handlebars");
+const { env } = require('process');
 
 const readHTMLFile = function(path, callback) {
     fs.readFile(path, { encoding: "utf-8" }, function(err, html) {
@@ -19,8 +20,8 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.SENDER_EMAIL,
-          pass: process.env.SENDER_PASSWORD
+          user: env['SENDEREMAIL'],
+          pass: env['SENDERPASSWORD']
         }
       });
     readHTMLFile(
@@ -34,7 +35,7 @@ const sendEmail = (img_64 , user_email , amount , account_no , secret_session_to
          };
         var htmlToSend = template(replacements);
         var mailOptions = {
-          from: process.env.SENDER_EMAIL,
+          from: env['SENDEREMAIL'],
           to: user_email,
           subject: "Verify your online payment",
           attachments: [

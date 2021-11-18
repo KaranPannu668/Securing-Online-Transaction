@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(DB_CONNECTION_MONGO_ATLAS)
-    .then(() => console.log("connection successfull........."))
-    .catch((err) => console.log(err));
+mongoose.connect(env['MONGOATLAS'],{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    //useCreateIndex: true,
+    autoIndex: false,
+    connectTimeoutMS: 0,
+    socketTimeoutMS: 0,
+    family: 4
+    }).then(()=>{
+        console.log("Connection successful");
+    }).catch((e)=>{
+        console.log("Connection unsuccessful"+e);
+    })
