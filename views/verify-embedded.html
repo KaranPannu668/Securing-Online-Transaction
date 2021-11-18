@@ -95,6 +95,21 @@ section{
     background-color: #02adfc;
     letter-spacing: 2px;
 }
+
+.btn{
+    padding: 10px 40px;
+color: white;
+background: linear-gradient(225deg,#1ee9b6de,#0388f4d3);
+border-radius: 5px;
+border: none;
+cursor: pointer;
+}
+.image{
+    align-items: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82); 
+    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.82);
+}
 @media (max-width: 1100px){
     section .contentbox .textbox{
         flex-direction: column;
@@ -123,13 +138,13 @@ section{
                 <p>&nbsp;to his account!!</p> -->
             </div>
             <div class="imgbox" >
-                <img style="align-items: center; padding-top: 0; margin-top: 0; margin-bottom: 0; padding-bottom: 0;" alt="transactor-image" src="cid:imagename">
+                <img class="image" alt="transactor-image" src="cid:imagename">
                  </div>
             <div class="radiobox" style="padding-top: 4vw;">
            <!-- <a href="http://localhost:1337/verify{{{email_session_token}}}" type="submit"><span style="color: white;">Verify</span></a> -->
            <form action="http://localhost:1337/verify-embedded" method="POST">
                <input style="display: none;" type="text" name="token" value="{{{email_session_token}}}" >
-               <input type="submit" value="Verify">
+               <input type="submit" value="Verify" class="btn">
            </form>
            </div>
         </div>
