@@ -5,6 +5,10 @@ const bodyParser=require("body-parser");
 const {google}=require("googleapis");
 const bcrypt = require("bcryptjs");
 const ejs = require('ejs');
+const helmet = require("helmet");
+const cookieparser = require("cookie-parser");
+
+
 var nodemailer=require('nodemailer');
 var inlineBase64 = require('nodemailer-plugin-inline-base64');
 const fs=require('fs');
@@ -13,11 +17,16 @@ const sendEmail = require(__dirname + "/views/email.js");
 const generateToken = require(__dirname + "/views/token.js");
 
 const app=express();
-const port = process.env.PORT;
-if(port == null || port == "")
-{
-    port = 1337;
-}
+app.use(helmet());
+app.use(cookieparser());
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+
+const port = process.env.PORT || 1337;
+// if(port == null || port == "")
+// {
+//     port = 1337;
+// }
 
 
 app.use(bodyParser.json({limit: "10mb"}));
@@ -30,7 +39,6 @@ app.use(express.static("public"));
 require(__dirname+"/db/conn.js");
 const Register = require(__dirname+"/models/registers");
 
-var err_msg_l="";
 var err_msg_s="";
 var err_msg_no_p="";
 var err_msg_code_p="";
@@ -43,7 +51,7 @@ var IFSC="";
 var amount="";
 var img64;
 var err_msg_reset="";
-let user_username;
+let user_username = "";
 var err_msg_amount_p="";
 let secret_token_login = generateToken(50);
 let user_token_login = "";
@@ -57,13 +65,11 @@ let email_verify_port = "";
 
 app.get("/", function(req, res){
     secret_token_login = generateToken(100);
-    res.render("practicum-login", {err_msg_l : err_msg_l});
-    err_msg_l="";
+    res.render("practicum-login", {err_msg_l : req.query.err});
 });
 
 
 app.post("/", async function(req, res){
-    err_msg_l="";
     username=req.body.Username;
     let password=req.body.Password;
     username_reset = username;
@@ -71,19 +77,18 @@ app.post("/", async function(req, res){
     user_username = await Register.Register.findOne({username: username});
     if(user_username == null)
     {
-        err_msg_l = "*Username does not exist";
-        res.redirect("/");
+        res.redirect("/?err=*Wrong Username or Password");
         return;
     }
     const isMatch = await bcrypt.compare(password, user_username.password);
 
     if(isMatch){
+        res.cookie("username", username , {maxAge: 1200000, httpOnly: true, sameSite : 'lax'});
        user_token_login = secret_token_login;
         res.status(201).redirect("/payment");
         return;
     }else{
-        err_msg_l="*Wrong Username or Password";
-        res.redirect("/");
+        res.redirect("/?err=*Wrong Username or Password");
         return;
     }
 
@@ -92,8 +97,7 @@ app.post("/", async function(req, res){
 
 
 app.get("/sign-up", function(req, res){
-    res.render("practicum-signup",{err_msg_s : err_msg_s , uname_s : uname , pword_s : pword , email_s : email});
-    err_msg_s = "";
+    res.render("practicum-signup",{err_msg_s : req.query.err , uname_s : uname , pword_s : pword , email_s : email});
     uname = "";
     pword = "";
     email = "";
@@ -109,33 +113,30 @@ app.post("/sign-up", async function(req, res){
     let isalreadytaken = await Register.Register.findOne({username : uname});
     if(uname.length<=6)
     {
-        err_msg_s="*Username must be longer than 6 characters";
         uname="";
-        res.redirect("/sign-up");
+        res.redirect("/sign-up?err=*Username must be longer than 6 characters");
     }
     else if(pword.length<=5)
     {
-        err_msg_s="*Password must be longer than 5 characters";
         pword="";
-        res.redirect("/sign-up");
+        res.redirect("/sign-up?err=*Password must be longer than 5 characters");
     }
     else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
     {
-        err_msg_s="*Invalid email address";
         email="";
-        res.redirect("/sign-up");
+        res.redirect("/sign-up?err=*Invalid email address");
     }
     else if(isalreadytaken != null)
     {
-        err_msg_s = "*This username is already taken.";
-        res.redirect("/sign-up")
+        res.redirect("/sign-up?=*This username is already taken.")
     }
     else{
             const registerUser = new Register.Register({
                 username : uname,
                 password : pword,
                 email : email,
-                amount : 10000000
+                amount : 10000000,
+                secret_session_token : "null"
             })
 
             const registered = await registerUser.save();
@@ -145,9 +146,7 @@ app.post("/sign-up", async function(req, res){
         }
     }catch(error){
         console.log(error);
-        err_msg_s = "*There was an error";
-        res.redirect("/sign-up");
-           // res.status(400).send(error);
+        res.redirect("/sign-up?err=*There was an error");
         }
     
 });
@@ -157,7 +156,7 @@ app.post("/sign-up", async function(req, res){
 
 app.get("/payment", function(req, res){
 
-    if(user_token_login == secret_token_login)
+    if(req.cookies.username)
     {
         res.render("practicum-payment",{acc_name_p : acc_name , err_msg_no_p : err_msg_no_p , err_msg_amount_p : err_msg_amount_p , acc_no_p : acc_no , err_msg_code_p : err_msg_code_p , IFSC_p : IFSC , amount_p : amount});
         acc_name="";
@@ -170,8 +169,7 @@ app.get("/payment", function(req, res){
     }
     else
     {
-        err_msg_l = "Please log in first."
-        res.redirect("/");
+        res.redirect("/?err=*Please log in first");
     }
     
 });
@@ -179,10 +177,11 @@ app.get("/payment", function(req, res){
 
 app.post("/payment", function(req, res){
 
-    if(user_token_login == secret_token_login)
+    if(req.cookies.username)
     {
         err_msg_no_p="";
         err_msg_code_p="";
+        err_msg_amount_p = "";
         acc_name=req.body.Acc_name;
         acc_no=req.body.Acc_no;
         IFSC=req.body.IFSC;
@@ -210,68 +209,65 @@ app.post("/payment", function(req, res){
             res.redirect("/payment");
         }
         else
-        res.redirect("/webcam");
+            res.redirect("/webcam?amount="+amount+"&account="+acc_no);
+        
     }
     else
     {
-        err_msg_l = "Please log in first."
-        res.redirect("/");
+        res.redirect("/?err=*Please log in first");
     }
 });
 
 
 app.get("/webcam", function(req, res){
 
-    if(user_token_login == secret_token_login)
+    if(req.cookies.username)
     {
         if(acc_name == "" || acc_no == "" || IFSC == "" || amount == "")
         res.redirect("/payment");
         else
-        res.sendFile(__dirname+"/Htmlpages/webcam.html");
+        res.render("webcam" , {queries : "account=" + req.query.account + "&amount=" + req.query.amount});
     }
     else
     {
-        err_msg_l = "Please log in first."
-        res.redirect("/");
+        res.redirect("/?err=*Please log in first");
     }
     
 });
 
 app.post("/webcam", async function(req, res){
 
-    if(user_token_login == secret_token_login)
+    if(req.cookies.username)
     {
         img64 = req.body.Image64bit;
-        secret_session_token = generateToken(100);
+
+        const user_username = await Register.Register.findOne({username : req.cookies.username});
+        console.log("Account no is: " + req.query.account + " Amount is: " + req.query.amount);
+        const _id = user_username._id;
+        const secret_session_token = generateToken(100);
+         //await Register.Register.findByIdAndUpdate({_id} , {$set : {'request.image' : img64} });
+         await Register.Register.updateMany({_id : _id} , {$set : {'request.secret_session_token' : secret_session_token , 'request.account' : req.query.account , 'request.amount' : req.query.amount , 'request.status' : "pending" , 'request.image' : img64}});
+        // await Register.Register.findByIdAndUpdate({_id} , {request: {$set : {image : img64} }});
+        
+       // await Register.Register.findByIdAndUpdate({_id} , {$set : {secret_session_token : secret_session_token}});
         payment_secret_token = generateToken(100);
-        email_verify_port = req.protocol + "://" + req.get('host') + "/verify?id=" + secret_session_token;
-        sendEmail(img64, user_username.email , amount , acc_no.substring(acc_no.length - 4) , email_verify_port);
+        const email_verify_port = req.protocol + "://" + req.get('host') + "/verify?token=" + secret_session_token + "&id=" + _id;
+        sendEmail(img64, user_username.email , req.query.amount , acc_no.substring((req.query.account).length - 4) , email_verify_port);
         var a = 0;
+        let status = "pending";
         while(a<=360)
         {
-            if(payment_status_token == payment_secret_token)
+            status = await Register.Register.findOne({'request.secret_session_token' : secret_session_token}).status;
+            console.log(status);
+            if(status == "verified")
             {
-               if(Register.UpdateAmount(user_username._id , user_username.amount - amount))
-            {
-                payment_secret_token = generateToken(100);
-                payment_status_token = "";
-                secret_token_login = generateToken(100);
-                user_token_login = "";
+                res.clearCookie("username");
                 res.redirect("/success");
                 return;
-             }
-             else
-             {
-                 res.redirect("/decline");
-                 return;
-             }
             }
-            if(payment_status_token == "--------------------")
+            if(payment_status_token == "decline")
             {
-                payment_status_token == "";
-                payment_secret_token = generateToken(100);
-                secret_token_login = generateToken(100);
-                user_token_login = "";
+                res.clearCookie("username");
                 res.redirect("/decline");
                 return;
             }
@@ -279,21 +275,20 @@ app.post("/webcam", async function(req, res){
             a++;
             await new Promise(resolve => setTimeout(resolve, 500));
         }
-        if(payment_status_token == "")
+        if(payment_status_token == "pending")
         {
-
-            secret_token_login = generateToken(100);
-            user_token_login = "";
+            await Register.Register.update({username : req.cookies.username} , {$set : {'request.status' : "timed-out"}})
+            res.clearCookie("username");
             res.redirect("/error");
         }
         return;
     }
     else
     {
-        err_msg_l = "Please log in first."
-        res.redirect("/");
+        res.redirect("/?err=*Please log in first");
     }
 })
+
 
 
 // app.post("/verify-embedded" , function(req, res){
@@ -306,40 +301,43 @@ app.post("/webcam", async function(req, res){
 
 
 
-app.get("/verify" , function(req, res){
+app.get("/verify" , async function(req, res){
     received_email_token = req.query.id;
-    if(req.query.id == secret_session_token)
+    const user_username = await Register.Register.findOne({_id : req.query.id});
+    const secret_session_token = user_username.request.secret_session_token;
+    if(secret_session_token == req.query.token && user_username.request.status == "pending")
     {
-        res.render("verify" , {transactor_image : img64 , amount : amount , account_no : acc_no.substring(acc_no.length - 4)});
+        const img64 = user_username.request.image;
+        const amount = user_username.request.amount;
+        const account = user_username.request.account;
+        res.render("verify" , {transactor_image : img64 , amount : amount , account_no : account.substring(account.length - 4) , queries : "token=" + req.query.token + "&id=" + req.query.id});
     }
     else
     res.redirect("/expired");
 });
 
 
-app.post("/verify" , function(req, res){
-    if(received_email_token == secret_session_token)
+app.post("/verify" , async function(req, res){
+    const user_username = await Register.Register.findOne({_id : req.query.id});
+    const secret_session_token = user_username.request.secret_session_token;
+    if(secret_session_token == req.query.token && user_username.request.status == "pending")
     {
-       let status=req.body.verification;
+       const status=req.body.verification;
+
+       //Add status to db
     if(status == "1")
     {
-        payment_status_token = payment_secret_token;
-        secret_session_token = generateToken(100);
-        received_email_token = "";
+        await Register.Register.updateMany({_id : req.query.id} , {$set : {amount : user_username.amount - req.query.amount , 'request.status' : "verified" , 'request.secret_session_token' : generateToken(100)}})
         res.redirect("/confirmed");
     }
     else if(status == "0")
     {
-        payment_status_token = "--------------------";
-        secret_session_token = generateToken(100);
-        received_email_token = "";
+        await Register.Register.updateMany({_id : req.query.id} , {$set : {'request.status' : "denied" , 'request.secret_session_token' : generateToken(100)}})
         res.redirect("/confirmed");
     }
     else
     {
-        payment_status_token = "--------------------";
-        secret_session_token = generateToken(100);
-        received_email_token = "";
+        await Register.Register.updateMany({_id : req.query.id} , {$set : {'request.status' : "denied" , 'request.secret_session_token' : generateToken(100)}})
         res.redirect("/reset");
     
     }

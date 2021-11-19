@@ -29,7 +29,7 @@
                 <video autoplay="true" width="700" height="400" id="video">
                 </video>
                 <div id="controller">
-                <button id="cap" onclick="capture()">Capture</button>
+                <button id="cap">Capture</button>
             </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
 
             </div>
             <div class="controller">
-                <form action="/Webcam" method="POST"><div style="display: none;">
+                <form action="/webcam?<%=queries%>" method="POST"><div style="display: none;">
                   <input type="text" id="img64capture" name="Image64bit" value=""></div>
                   <input id="cap-1" type="submit" value="Submit">
                  </form>
@@ -56,33 +56,10 @@
           </div> 
     </div>
     <div class="main-waiting">
-        <img src="https://i.gifer.com/QHTn.gif" alt="" height="50%" width="50%">
+        <!-- <img src="https://i.gifer.com/QHTn.gif" alt="" height="50%" width="50%"> -->
+        <img src="" id="animatedimage" alt="" height="50%" width="50%">
     </div>
     </section>
-  <script>
-    var video = document.querySelector("#video");
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-          console.log("Something went wrong!");
-        });
-    }
-    function capture() {
-      var canvas = document.getElementById('canvas');     
-      var video = document.getElementById('video');
-      canvas.width = 500;
-      canvas.height = 400;
-      canvas.getContext('2d').drawImage(video, 0, 0, 500,400);  
-      document.getElementById("img64capture").value = canvas.toDataURL();
-    }
-
-    document.getElementById("cap-1").addEventListener('click' , function(){
-      document.getElementById("webcam").classList.toggle("hide");
-      document.getElementById("waiting").classList.toggle("hide");
-    })
-    </script>
+    <script src = "js/webcam.js"></script>
 </body>
 </html>

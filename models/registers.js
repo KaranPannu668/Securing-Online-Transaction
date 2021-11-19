@@ -18,6 +18,23 @@ const userSchema = new mongoose.Schema({
     },
     amount: {
         type: Number
+    },
+    request : {
+        secret_session_token: {
+            type: String
+        },
+        account : {
+            type : String
+        },
+        amount : {
+            type: Number
+        },
+        status: {
+                type : String
+            },
+        image: {
+            type : String
+        },
     }
 })
 
