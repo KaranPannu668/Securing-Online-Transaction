@@ -13,7 +13,7 @@
             <h1>Reset Password</h1>
             <span style="color: red;"><%=error_msg_reset%></span>
             <div class="formbox">
-                <form action="/reset" method="POST">
+                <form action="/reset?<%=queries%>" method="POST">
                 <div class="inputbox">
                     <span>Old Password</span>
                     <input type="password" name="Oldpassword" id="">

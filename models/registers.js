@@ -19,22 +19,40 @@ const userSchema = new mongoose.Schema({
     amount: {
         type: Number
     },
-    request : {
-        secret_session_token: {
-            type: String
-        },
-        account : {
-            type : String
-        },
-        amount : {
-            type: Number
-        },
-        status: {
-                type : String
-            },
-        image: {
-            type : String
-        },
+})
+
+
+const requestSchema = new mongoose.Schema({
+    login_token : {
+        type : String
+    },
+    userid : {
+        type : String
+    },
+    session_token : {
+        type: String
+    },
+    payee_name : {
+        type : String
+    },
+    account_no : {
+        type: String
+    },
+    IFSC : {
+        type : String
+    },
+    amount : {
+        type : Number
+    },
+    payment_status: {
+        type : String,
+    },
+    image: {
+        type : String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 
@@ -47,6 +65,7 @@ userSchema.pre("save", async function(next){
 // Creating a collection
 
 const Register = new mongoose.model("Register", userSchema);
+const Request = new mongoose.model("Request" , requestSchema);
 
 async function Updatepassword(_id, newpassword){
     let result;
@@ -86,4 +105,4 @@ async function UpdateAmount(_id, amount){
 
 
 
-module.exports = {Register , Updatepassword , UpdateAmount};
+module.exports = {Register , Updatepassword , UpdateAmount , Request};
