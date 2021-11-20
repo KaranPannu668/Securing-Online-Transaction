@@ -31,11 +31,10 @@ const port = process.env.PORT || 1337;
 // }
 
 
-app.use(bodyParser.json({limit: "10mb"}));
-app.use(bodyParser.urlencoded({limit: "10mb", extended: true, parameterLimit:50000}));
+app.use(express.json({limit: "10mb"}));
+app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit:50000}));
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 require(__dirname+"/db/conn.js");
@@ -66,42 +65,44 @@ let email_verify_port = "";
 
 
 app.get("/", function(req, res){
-    secret_token_login = generateToken(100);
     res.render("practicum-login", {err_msg_l : req.query.err});
 });
 
 
 app.post("/", async function(req, res){
-    username=req.body.Username;
-    let password=req.body.Password;
-    username_reset = username;
+    try{
+        username=req.body.Username;
+        let password=req.body.Password;
+        username_reset = username;
 
-    user_username = await Register.Register.findOne({username: username});
-    if(user_username == null)
-    {
-        res.redirect("/?err=*Wrong Username or Password");
-        return;
+        user_username = await Register.Register.findOne({username: username});
+        if(user_username == null)
+        {
+            res.redirect("/?err=*Wrong Username or Password");
+            return;
+        }
+        const isMatch = await bcrypt.compare(password, user_username.password);
+
+        if(isMatch){
+            const login_token = generateToken(100);
+
+            const registerRequest = Register.Request({
+                login_token : login_token,
+                userid : user_username._id,
+                payment_status : "pending"
+            })
+            const registered = await registerRequest.save();
+            res.cookie("login_token", login_token , {maxAge: 1200000, httpOnly: true, sameSite : 'lax'});
+        user_token_login = secret_token_login;
+            res.status(201).redirect("/payment");
+            return;
+        }else{
+            res.redirect("/?err=*Wrong Username or Password");
+            return;
     }
-    const isMatch = await bcrypt.compare(password, user_username.password);
-
-    if(isMatch){
-        const login_token = generateToken(100);
-
-        const registerRequest = Register.Request({
-            login_token : login_token,
-            userid : user_username._id,
-            payment_status : "pending"
-        })
-        const registered = await registerRequest.save();
-
-
-        res.cookie("login_token", login_token , {maxAge: 1200000, httpOnly: true, sameSite : 'lax'});
-       user_token_login = secret_token_login;
-        res.status(201).redirect("/payment");
-        return;
-    }else{
-        res.redirect("/?err=*Wrong Username or Password");
-        return;
+    }catch(error)
+    {
+        res.redirect("/?err=*There was an error");
     }
 
 });
@@ -156,6 +157,9 @@ app.post("/sign-up", async function(req, res){
 
 
         }
+        uname = "";
+        pword = "";
+        email = "";
     }catch(error){
         console.log(error);
         res.redirect("/sign-up?err=*There was an error");
@@ -167,92 +171,113 @@ app.post("/sign-up", async function(req, res){
 
 
 app.get("/payment", async function(req, res){
-    const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-
-    if(login_token)
+    try{
+        const login_token = await Register.Request.findOne({login_token : req.cookies.login_token});
+        if(login_token)
+        {
+            res.render("practicum-payment",{acc_name_p : acc_name , err_msg_no_p : err_msg_no_p , err_msg_amount_p : err_msg_amount_p , acc_no_p : acc_no , err_msg_code_p : err_msg_code_p , IFSC_p : IFSC , amount_p : amount});
+            acc_name="";
+            acc_no="";
+            IFSC="";
+            amount="";
+            err_msg_no_p = "";
+            err_msg_amount_p = "";
+            err_msg_code_p = "";
+        }
+        else
+        {
+            res.redirect("/?err=*Please log in first");
+        }
+    }catch(error)
     {
-        res.render("practicum-payment",{acc_name_p : acc_name , err_msg_no_p : err_msg_no_p , err_msg_amount_p : err_msg_amount_p , acc_no_p : acc_no , err_msg_code_p : err_msg_code_p , IFSC_p : IFSC , amount_p : amount});
-        acc_name="";
-        acc_no="";
-        IFSC="";
-        amount="";
-        err_msg_no_p = "";
-        err_msg_amount_p = "";
-        err_msg_code_p = "";
-    }
-    else
-    {
-        res.redirect("/?err=*Please log in first");
+        res.redirect("/sign-up?err=*There was an error");
     }
     
 });
 
 
 app.post("/payment", async function(req, res){
-    const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-
-    if(login_token)
-    {
-        const user_username = Register.Register.findOne({_id : login_token.userid})
-        err_msg_no_p="";
-        err_msg_code_p="";
-        err_msg_amount_p = "";
-        acc_name=req.body.Acc_name;
-        acc_no=req.body.Acc_no;
-        IFSC=req.body.IFSC;
-        amount=req.body.amount;
-        if(acc_no.length<9||acc_no.length>18)
+    try{
+        const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
+        if(login_token)
         {
-            err_msg_no_p="*Invalid account number";
-            acc_no="";
-            res.redirect("/payment");
-        }
-        else if(!(/^[A-Z]{4}0[A-Z0-9]{6}$/.test(IFSC)))
-        {
-            err_msg_code_p="*Invalid IFSC code";
-            IFSC="";
-            res.redirect("/payment");
-        }
-        else if(amount > user_username.amount || amount <=0)
-        {
-            if(amount > user_username.amount)
-            err_msg_amount_p = "*Insufficient funds";
+            const user_username = Register.Register.findOne({_id : login_token.userid})
+            err_msg_no_p="";
+            err_msg_code_p="";
+            err_msg_amount_p = "";
+            acc_name=req.body.Acc_name;
+            acc_no=req.body.Acc_no;
+            IFSC=req.body.IFSC;
+            amount=req.body.amount;
+            if(acc_no.length<9||acc_no.length>18)
+            {
+                err_msg_no_p="*Invalid account number";
+                acc_no="";
+                res.redirect("/payment");
+            }
+            else if(!(/^[A-Z]{4}0[A-Z0-9]{6}$/.test(IFSC)))
+            {
+                err_msg_code_p="*Invalid IFSC code";
+                IFSC="";
+                res.redirect("/payment");
+            }
+            else if(amount > user_username.amount || amount <=0)
+            {
+                if(amount > user_username.amount)
+                err_msg_amount_p = "*Insufficient funds";
+                else
+                err_msg_amount_p = "*Enter a valid amount";
+                amount = "";
+                res.redirect("/payment");
+            }
             else
-            err_msg_amount_p = "*Enter a valid amount";
-            amount = "";
-            res.redirect("/payment");
+                res.redirect("/webcam?name=" + acc_name +  "&amount=" + amount + "&IFSC=" + IFSC + "&account="+acc_no);
+            
         }
         else
-            res.redirect("/webcam?name=" + acc_name +  "&amount=" + amount + "&IFSC=" + IFSC + "&account="+acc_no);
-        
-    }
-    else
+        {
+            res.redirect("/?err=*Please log in first");
+        }
+
+            acc_name="";
+            acc_no="";
+            IFSC="";
+            amount="";
+            err_msg_no_p = "";
+            err_msg_amount_p = "";
+            err_msg_code_p = "";
+    }catch(error)
     {
-        res.redirect("/?err=*Please log in first");
+        res.redirect("/?err=*There was an error");
     }
+
 });
 
 
 app.get("/webcam", async function(req, res){
-    const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-
-    if(login_token)
-    {
-        if(req.query.name == "" || req.query.account == "" || req.query.IFSC == "" || req.query.amount == "")
-        res.redirect("/payment");
+    try{
+        const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
+        if(login_token)
+        {
+            if(req.query.name == "" || req.query.account == "" || req.query.IFSC == "" || req.query.amount == "")
+            res.redirect("/payment");
+            else
+            res.render("webcam" , {queries : "name=" + req.query.name + "&IFSC=" + req.query.IFSC + "&account=" + req.query.account + "&amount=" + req.query.amount});
+        }
         else
-        res.render("webcam" , {queries : "name=" + req.query.name + "&IFSC=" + req.query.IFSC + "&account=" + req.query.account + "&amount=" + req.query.amount});
-    }
-    else
+        {
+            res.redirect("/?err=*Please log in first");
+        }
+    }catch(error)
     {
-        res.redirect("/?err=*Please log in first");
+        res.redirect("/?err=*There was an error");
     }
     
 });
 
 app.post("/webcam", async function(req, res){
+    try{
     const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-
     if(login_token)
     {
         img64 = req.body.Image64bit;
@@ -275,10 +300,8 @@ app.post("/webcam", async function(req, res){
         let payment_status = "pending";
         while(a<=360)
         {
-            console.log(request_id);
              received_request = await Register.Request.findOne({_id : request_id});
              payment_status = received_request.payment_status;
-            console.log(payment_status);
             if(payment_status == "verified")
             {
                 //await Register.Register.findByIdAndUpdate({_id} , {$set : {amount : user_username.amount - req.query.amount}});
@@ -311,6 +334,10 @@ app.post("/webcam", async function(req, res){
     {
         res.redirect("/?err=*Please log in first");
     }
+    }catch(error)
+    {
+        res.redirect("/?err=*There was an error");
+    }
 })
 
 
@@ -326,7 +353,9 @@ app.post("/webcam", async function(req, res){
 
 
 app.get("/verify" , async function(req, res){
-    const received_request = await Register.Request.findOne({_id : req.query.id});
+    const received_request = await Register.Request.findOne({session_token : req.query.token});
+    if(received_request !=null && received_request != undefined)
+    {
     if(req.query.token == received_request.session_token && received_request.session_token != "logged-out")
     {
         const img64 = received_request.image;
@@ -336,11 +365,16 @@ app.get("/verify" , async function(req, res){
     }
     else
     res.redirect("/expired");
+    }
+    else
+    res.redirect("/expired");
 });
 
 
 app.post("/verify" , async function(req, res){
-    const received_request = await Register.Request.findOne({_id : req.query.id});
+    const received_request = await Register.Request.findOne({session_token : req.query.token});
+    if(received_request !=null && received_request != undefined)
+    {
     const _id = received_request.userid;
     const user_username = await Register.Register.findOne({_id : _id});
     if(req.query.token == received_request.session_token && received_request.session_token != "logged-out")
@@ -366,9 +400,10 @@ app.post("/verify" , async function(req, res){
     }
     }
     else
-    {
         res.redirect("expired");
     }
+    else
+        res.redirect("expired");
 });
 
 app.get("/success", function(req, res){
@@ -385,16 +420,25 @@ app.get("/error" , function(req, res){
 })
 
 app.get("/reset" , async function(req, res){
-    const received_request = await Register.Request.findOne({_id : req.query.id});
+    const received_request = await Register.Request.findOne({session_token : req.query.token});
+    if(received_request !=null && received_request != undefined)
+    {
     if(req.query.token == received_request.session_token && received_request.session_token != "logged-out")
     {
         res.render("reset" , {error_msg_reset : err_msg_reset , queries : "token=" + req.query.token + "&id=" + req.query.id});
     }
+    else
+    res.redirect("/expired");
+    }
+    else
+    res.redirect("/expired");
 })
 
 
 app.post("/reset" , async function(req, res){
-    const received_request = await Register.Request.findOne({_id : req.query.id});
+    const received_request = await Register.Request.findOne({session_token : req.query.token});
+    if(received_request !=null && received_request != undefined)
+    {
     const _id = received_request.userid;
     const request_id = req.query.id;
     const user_username = await Register.Register.findOne({_id : _id});
@@ -402,7 +446,7 @@ app.post("/reset" , async function(req, res){
     if(req.query.token == received_request.session_token && received_request.session_token != "logged-out")
     {
     const oldpassword = req.body.Oldpassword;
-    const newpassword = req.body.Newpassword;
+    let newpassword = req.body.Newpassword;
     const confirmpassword = req.body.Confirmpassword;
 
     const isMatch_reset = await bcrypt.compare(oldpassword, user_username.password);
@@ -433,10 +477,14 @@ app.post("/reset" , async function(req, res){
         }
         else
         {
-            await Register.Register.findByIdAndUpdate({_id} , {$set : {password : await bcrypt.hash(newpassword , 10)}})
-            await Register.Request.findByIdAndUpdate({request_id} , {$set : {session_token : "logged-out"}})
+            newpassword = await bcrypt.hash(newpassword , 10);
+            await Register.Register.findByIdAndUpdate({_id} , {$set : {password : newpassword}})
+            await Register.Request.updateOne({session_token : req.query.token} , {$set : {session_token : "logged-out"}})
             res.redirect("/confirmed");
         }
+    }
+    else
+    res.redirect("/expired");
     }
     else
     res.redirect("/expired");
