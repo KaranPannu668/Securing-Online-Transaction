@@ -22,4 +22,4 @@ var video = document.querySelector("#video");
       document.getElementById("waiting").classList.toggle("hide");
     });
 
-    document.getElementById("animatedimage").src = "https://i.gifer.com/QHTn.gif";
+    //document.getElementById("animatedimage").src = "https://i.gifer.com/QHTn.gif";
