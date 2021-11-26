@@ -283,40 +283,41 @@ app.post("/webcam", async function(req, res){
         console.log("Account no is: " + req.query.account + " Amount is: " + req.query.amount);
         const request_id = login_token._id;
         const secret_session_token = generateToken(100);
-         await Register.Request.updateMany({_id : login_token._id} , {$set : {session_token : secret_session_token , payee_name : req.query.name , account_no : req.query.account , IFSC : req.query.IFSC , amount : req.query.amount , status : "pending" , image : img64}});
+        await Register.Request.updateMany({_id : login_token._id} , {$set : {session_token : secret_session_token , payee_name : req.query.name , account_no : req.query.account , IFSC : req.query.IFSC , amount : req.query.amount , status : "pending" , image : img64}});
         payment_secret_token = generateToken(100);
         const email_verify_port = req.protocol + "://" + req.get('host') + "/verify?token=" + secret_session_token + "&id=" + login_token._id;
         sendEmail(img64, user_username.email , req.query.amount , account_no.substring((req.query.account).length - 4) , email_verify_port);
-        var a = 0;
-        let received_request;
-        let payment_status = "pending";
-        while(a<=360)
-        {
-             received_request = await Register.Request.findOne({_id : request_id});
-             payment_status = received_request.payment_status;
-            if(payment_status == "verified")
-            {
-                res.clearCookie("login_token");
-                res.redirect("/success");
-                return;
-            }
-            if(payment_status == "denied" || payment_status == "password-changed")
-            {
-                res.clearCookie("login_token");
-                res.redirect("/decline");
-                return;
-            }
+        res.redirect("/waiting?count=1");
+        // var a = 0;
+        // let received_request;
+        // let payment_status = "pending";
+        // while(a<=360)
+        // {
+        //      received_request = await Register.Request.findOne({_id : request_id});
+        //      payment_status = received_request.payment_status;
+        //     if(payment_status == "verified")
+        //     {
+        //         res.clearCookie("login_token");
+        //         res.redirect("/success");
+        //         return;
+        //     }
+        //     if(payment_status == "denied" || payment_status == "password-changed")
+        //     {
+        //         res.clearCookie("login_token");
+        //         res.redirect("/decline");
+        //         return;
+        //     }
 
-            a++;
-            await new Promise(resolve => setTimeout(resolve, 500));
-        }
-        if(payment_status == "pending")
-        {
-            await Register.Register.updateMany({login_token : req.cookies.login_token} , {$set : {payment_status : "timed-out" , session_token : "logged-out" , login_token : "logged-out"}});
-            res.clearCookie("login_token");
-            res.redirect("/error");
-        }
-        return;
+        //     a++;
+        //     await new Promise(resolve => setTimeout(resolve, 500));
+        // }
+        // if(payment_status == "pending")
+        // {
+        //     await Register.Register.updateMany({login_token : req.cookies.login_token} , {$set : {payment_status : "timed-out" , session_token : "logged-out" , login_token : "logged-out"}});
+        //     res.clearCookie("login_token");
+        //     res.redirect("/error");
+        // }
+        // return;
     }
     else
     {
@@ -327,6 +328,86 @@ app.post("/webcam", async function(req, res){
         res.redirect("/?err=*There was an error");
     }
 });
+
+
+
+
+app.get("/waiting" , async function(req , res){
+    try{
+        const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
+        if(login_token)
+        {
+            console.log("Get request count = " + req.query.count);
+            res.render("waiting" , {queries : "count=" +req.query.count});
+        }
+        else
+        res.redirect("/?err=*Please log in first");
+
+    }catch(error)
+    {
+        res.redirect("/?err=*There was an error");
+    }
+});
+
+
+app.post("/waiting" , async function(req , res){
+    try{
+        const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
+        if(login_token)
+        {
+            var count = parseInt(req.query.count , 10);
+            console.log("Post request count = " + req.query.count);
+            const request_id = login_token._id;
+            if(count <= 9)
+            {
+                var a = 0;
+                let received_request;
+                let payment_status = "pending";
+                while(a<=40)
+                {
+                    received_request = await Register.Request.findOne({_id : request_id});
+                    payment_status = received_request.payment_status;
+                    if(payment_status == "verified")
+                    {
+                        res.clearCookie("login_token");
+                        res.redirect("/success");
+                        return;
+                    }
+                    if(payment_status == "denied" || payment_status == "password-changed")
+                    {
+                        res.clearCookie("login_token");
+                        res.redirect("/decline");
+                        return;
+                    }
+
+                    a++;
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+            }
+            else
+            {
+                console.log(req.query.count)
+                await Register.Request.updateMany({login_token : req.cookies.login_token} , {$set : {payment_status : "timed-out" , session_token : "logged-out" , login_token : "logged-out"}});
+                res.clearCookie("login_token");
+                res.redirect("/error");
+                return;
+            }
+            count = count+1;
+            res.redirect("/waiting?count=" + count.toString());
+            
+        }
+        else
+        res.redirect("/?err=*Please log in first");
+
+    }catch(error)
+    {
+        console.log(error);
+        res.redirect("/?err=*There was an error");
+    }
+})
+
+
+
 
 
 app.get("/verify" , async function(req, res){

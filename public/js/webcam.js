@@ -16,10 +16,3 @@ var video = document.querySelector("#video");
       canvas.getContext('2d').drawImage(video, 0, 0, 500,400);  
       document.getElementById("img64capture").value = canvas.toDataURL();
     });
-
-    document.getElementById("cap-1").addEventListener('click' , function(){
-      document.getElementById("webcam").classList.toggle("hide");
-      document.getElementById("waiting").classList.toggle("hide");
-    });
-
-    //document.getElementById("animatedimage").src = "https://i.gifer.com/QHTn.gif";

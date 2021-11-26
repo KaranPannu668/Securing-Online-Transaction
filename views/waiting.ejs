@@ -17,12 +17,13 @@
           </div> 
     </div>
     <div class="main-waiting">
-        <img src="https://i.gifer.com/QHTn.gif" alt="" height="50%" width="50%">
+        <video src="images/QHTn.mp4" autoplay loop height="50%" width="50%"></video>
     </div>
-    
-      
-  <script>
-    
-    </script>
+    <div style="display: none;">
+        <form action="/waiting?<%=queries%>" method="POST">
+            <input type="submit" id="form_submit">
+        </form>
+    </div>
+    <script src = "js/waiting.js"></script>
 </body>
 </html>
