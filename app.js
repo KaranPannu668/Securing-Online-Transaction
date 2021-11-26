@@ -358,7 +358,7 @@ app.post("/waiting" , async function(req , res){
             var count = parseInt(req.query.count , 10);
             console.log("Post request count = " + req.query.count);
             const request_id = login_token._id;
-            if(count <= 18)
+            if(count <= 10)
             {
                 var a = 0;
                 let received_request;
