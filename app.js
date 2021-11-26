@@ -358,12 +358,12 @@ app.post("/waiting" , async function(req , res){
             var count = parseInt(req.query.count , 10);
             console.log("Post request count = " + req.query.count);
             const request_id = login_token._id;
-            if(count <= 9)
+            if(count <= 18)
             {
                 var a = 0;
                 let received_request;
                 let payment_status = "pending";
-                while(a<=40)
+                while(a<=20)
                 {
                     received_request = await Register.Request.findOne({_id : request_id});
                     payment_status = received_request.payment_status;
