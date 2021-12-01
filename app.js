@@ -40,7 +40,6 @@ app.use(express.static("public"));
 require(__dirname+"/db/conn.js");
 const Register = require(__dirname+"/models/registers");
 
-var err_msg_s="";
 var err_msg_no_p="";
 var err_msg_code_p="";
 var uname="";
@@ -50,18 +49,9 @@ var acc_name="";
 var acc_no="";
 var IFSC="";
 var amount="";
-var img64;
 var err_msg_reset="";
 let user_username = "";
 var err_msg_amount_p="";
-let secret_token_login = generateToken(50);
-let user_token_login = "";
-let secret_session_token = "";
-let payment_secret_token = generateToken(50);
-let payment_status_token = "";
-let received_email_token = "";
-let email_verify_port = "";
-
 
 
 app.get("/", function(req, res){
@@ -92,8 +82,7 @@ app.post("/", async function(req, res){
                 payment_status : "pending"
             })
             const registered = await registerRequest.save();
-            res.cookie("login_token", login_token , {maxAge: 1200000, httpOnly: true, sameSite : 'lax'});
-        user_token_login = secret_token_login;
+            res.cookie("login_token", login_token , {maxAge: 1200000, httpOnly: true, secure: true, sameSite : 'lax'});
             res.status(201).redirect("/payment");
             return;
         }else{
@@ -114,6 +103,7 @@ app.get("/sign-up", function(req, res){
     uname = "";
     pword = "";
     email = "";
+    err_msg_s = "";
 });
 
 
@@ -151,15 +141,13 @@ app.post("/sign-up", async function(req, res){
                 amount : 10000000,
                 secret_session_token : "null"
             })
-
+            uname = "";
+            pword = "";
+            email = "";
             const registered = await registerUser.save();
             res.status(201).redirect("/");
-
-
         }
-        uname = "";
-        pword = "";
-        email = "";
+        
     }catch(error){
         console.log(error);
         res.redirect("/sign-up?err=*There was an error");
@@ -197,7 +185,8 @@ app.post("/payment", async function(req, res){
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
         if(login_token)
         {
-            const user_username = Register.Register.findOne({_id : login_token.userid})
+            const _id = login_token.userid;
+            const user_username = await Register.Register.findOne({_id : _id});
             err_msg_no_p="";
             err_msg_code_p="";
             err_msg_amount_p = "";
@@ -205,6 +194,9 @@ app.post("/payment", async function(req, res){
             acc_no=req.body.Acc_no;
             IFSC=req.body.IFSC;
             amount=req.body.amount;
+            const avail_amount = user_username.amount;
+            console.log(user_username);
+            console.log(_id + "     " + amount + "       " + avail_amount);
             if(acc_no.length<9||acc_no.length>18)
             {
                 err_msg_no_p="*Invalid account number";
@@ -217,9 +209,9 @@ app.post("/payment", async function(req, res){
                 IFSC="";
                 res.redirect("/payment");
             }
-            else if(amount > user_username.amount || amount <=0)
+            else if(amount > avail_amount || amount <=0)
             {
-                if(amount > user_username.amount)
+                if(amount > avail_amount)
                 err_msg_amount_p = "*Insufficient funds";
                 else
                 err_msg_amount_p = "*Enter a valid amount";
@@ -227,14 +219,21 @@ app.post("/payment", async function(req, res){
                 res.redirect("/payment");
             }
             else
-                res.redirect("/webcam?name=" + acc_name +  "&amount=" + amount + "&IFSC=" + IFSC + "&account="+acc_no);
+                {
+                    res.redirect("/webcam?name=" + acc_name +  "&amount=" + amount + "&IFSC=" + IFSC + "&account="+acc_no);
+                    acc_name="";
+                    acc_no="";
+                    IFSC="";
+                    amount="";
+                    err_msg_no_p = "";
+                    err_msg_amount_p = "";
+                    err_msg_code_p = "";
+                }
             
         }
         else
         {
             res.redirect("/?err=*Please log in first");
-        }
-
             acc_name="";
             acc_no="";
             IFSC="";
@@ -242,9 +241,18 @@ app.post("/payment", async function(req, res){
             err_msg_no_p = "";
             err_msg_amount_p = "";
             err_msg_code_p = "";
+        }
+
     }catch(error)
     {
         res.redirect("/?err=*There was an error");
+        acc_name="";
+        acc_no="";
+        IFSC="";
+        amount="";
+        err_msg_no_p = "";
+        err_msg_amount_p = "";
+        err_msg_code_p = "";
     }
 
 });
@@ -276,9 +284,8 @@ app.post("/webcam", async function(req, res){
     const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
     if(login_token)
     {
-        img64 = req.body.Image64bit;
+        const img64 = req.body.Image64bit;
         const account_no = req.query.account;
-
         const user_username = await Register.Register.findOne({_id : login_token.userid});
         console.log("Account no is: " + req.query.account + " Amount is: " + req.query.amount);
         const request_id = login_token._id;
@@ -337,7 +344,6 @@ app.get("/waiting" , async function(req , res){
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
         if(login_token)
         {
-            console.log("Get request count = " + req.query.count);
             res.render("waiting" , {queries : "count=" +req.query.count});
         }
         else
@@ -356,7 +362,6 @@ app.post("/waiting" , async function(req , res){
         if(login_token)
         {
             var count = parseInt(req.query.count , 10);
-            console.log("Post request count = " + req.query.count);
             const request_id = login_token._id;
             if(count <= 10)
             {
@@ -386,7 +391,6 @@ app.post("/waiting" , async function(req , res){
             }
             else
             {
-                console.log(req.query.count)
                 await Register.Request.updateMany({login_token : req.cookies.login_token} , {$set : {payment_status : "timed-out" , session_token : "logged-out" , login_token : "logged-out"}});
                 res.clearCookie("login_token");
                 res.redirect("/error");
