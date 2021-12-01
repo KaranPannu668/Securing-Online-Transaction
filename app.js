@@ -195,8 +195,6 @@ app.post("/payment", async function(req, res){
             IFSC=req.body.IFSC;
             amount=req.body.amount;
             const avail_amount = user_username.amount;
-            console.log(user_username);
-            console.log(_id + "     " + amount + "       " + avail_amount);
             if(acc_no.length<9||acc_no.length>18)
             {
                 err_msg_no_p="*Invalid account number";
@@ -287,7 +285,6 @@ app.post("/webcam", async function(req, res){
         const img64 = req.body.Image64bit;
         const account_no = req.query.account;
         const user_username = await Register.Register.findOne({_id : login_token.userid});
-        console.log("Account no is: " + req.query.account + " Amount is: " + req.query.amount);
         const request_id = login_token._id;
         const secret_session_token = generateToken(100);
         await Register.Request.updateMany({_id : login_token._id} , {$set : {session_token : secret_session_token , payee_name : req.query.name , account_no : req.query.account , IFSC : req.query.IFSC , amount : req.query.amount , status : "pending" , image : img64}});
@@ -374,12 +371,14 @@ app.post("/waiting" , async function(req , res){
                     payment_status = received_request.payment_status;
                     if(payment_status == "verified")
                     {
+                        await Register.Request.updateOne({_id : request_id} , {$set : {login_token : "logged-out"}})
                         res.clearCookie("login_token");
                         res.redirect("/success");
                         return;
                     }
                     if(payment_status == "denied" || payment_status == "password-changed")
                     {
+                        await Register.Request.updateOne({_id : request_id} , {$set : {login_token : "logged-out"}})
                         res.clearCookie("login_token");
                         res.redirect("/decline");
                         return;
@@ -445,20 +444,19 @@ app.post("/verify" , async function(req, res){
     if(status == "1")
     {
         await Register.Register.findByIdAndUpdate({_id} , {$set : {amount : user_username.amount - received_request.amount}})
-        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "verified" , session_token : "logged-out" , login_token : "logged-out"}})
+        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "verified" , session_token : "logged-out"}})
 
         res.redirect("/confirmed");
     }
     else if(status == "0")
     {
-        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "denied" , session_token : "logged-out" , login_token : "logged-out"}})
+        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "denied" , session_token : "logged-out"}})
         res.redirect("/confirmed");
     }
     else
     {
-        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "password-changed" , login_token : "logged-out"}})
+        await Register.Request.updateMany({_id : req.query.id} , {$set : {payment_status : "password-changed"}})
         res.redirect("/reset?token=" + req.query.token + "&id=" + req.query.id);
-    
     }
     }
     else
