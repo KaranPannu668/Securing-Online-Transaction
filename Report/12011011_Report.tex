@@ -56,14 +56,13 @@
     \begin{Large}\textbf{ACKNOWLEDGEMENT}\end{Large}
 \end{center}\\
 \vspace{1cm}
-I would like to extend my sincere thanks to Dr Mukesh Mann for providing us with the glorious opportunity to work on the magnificent project Securing Online Transactions and for their precious assistance at every juncture of our journey in bringing this project to reality. I find myself lucky to be the recipient of his advice and encouragement. 
+I would like to extend my sincere thanks to Dr Mukesh Mann for providing us with the glorious opportunity to work on the magnificent project Securing Online Transactions and for their precious assistance at every juncture of our journey in bringing this project to reality. I find myself lucky to be the recipient of his advice and encouragement.
 
 I cannot ever I think, succeed in verbalising the support and inspiration bestowed upon me by my parents who despite their busy schedules never passed over any moment where they could succour me. I am very grateful for their highly cherished support during this project.
 
 I consider myself lucky to have secured a chance to make this project as it imparted a great deal of knowledge about real life problems and the methods to approach and finally attempt to solve them. I learned a lot about many tools which were initially new to me to handle such projects. 
 
 Last but not the least, I am very thankful to my team members for providing me with the honor of working with them as a group. Their sincerity and inclination towards the project was a major source of inspiration for me. They spared no effort to help every time I stumbled upon an obstacle in this journey. It was a real pleasure working with them.
-
 \vspace{2cm}\\
 \textbf{Karanbir Singh Pannu(12011011)}
 \setcounter{page}{2}
@@ -226,7 +225,7 @@ To detect a potential banking fraud is not an easy task. Some of the challenges 
 \end{itemize}
 \pagebreak
 \subsection{Project Objective}
-Cybercrime is one of the major problems faced by the countries across the globe these days. It includes unauthorized access of information and invasion privacy to obtain passwords, bank data etc. of any person with the use of internet. With the increasing demand of online payment in almost every sector of business, online frauds need to be addressed sternly. 
+Cybercrime is one of the major problems faced by the countries across the globe these days. It includes unauthorized access of information and invasion of privacy to obtain passwords, bank data etc. of any person with the use of internet. With the increasing demand of online payment in almost every sector of business, online frauds need to be addressed sternly. 
 
 The vision of this project is to make online banking a safe and secure payment medium through the employment of identity validation. Identity validation is an important requirement in most processes and procedures, whether offline or online. Identity validation lays down trust in the consumer that his funds are being handled fairly. It proves that there is a real person behind the process and is indeed the one he or she claims to be. It is a simple procedure which could keep one's account safe and at the same time, not derange genuine customers as it only takes a couple of moments to complete the whole validation process. Although simple, it is very sound as the command rests solely in the hands of the account holder.
 
@@ -266,7 +265,7 @@ The above process can be completed in nearly the same time as a normal transacti
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Figure2.png}\\
 \caption{Methodology}
-\label{fig:Figure 1}
+\label{fig:Figure 2}
 \end{center}
 \end{figure}
 
@@ -381,6 +380,355 @@ Online theft and crimes is a very vast field and is understudied in many respect
 The purpose of this chapter is to lay out a thorough but not all-inclusive review of the literature of the different techniques discussed. However these studies could be investigated further through the reference provided at the end. 
 
 The methodologies presented in this chapter communicate many ways for the prevention of online scams ex, survey through questions to detect fraudulent behavior, analysing behavioral patterns of devices and users accessing customer's account to find out any suspicious activity through HMM, local and global behavior, hierarchical attention, etc,. Methods of educating the users against such potential crimes and monitoring and helping victims were also discussed as mitigation techniques. 
+
+
+\pagebreak
+
+
+%Chapter 3
+\begin{Large}
+\begin{center}
+\textbf{CHAPTER\\
+\section{IMPLEMENTATION OF PHOTO VALIDATION}}\\
+\line(1,0){300}\\
+\end{center}
+\end{Large}
+\vspace{0.5cm}
+\subsection{Introduction}
+This report aims at the designing of a secure payment gateway where a user has complete control over the transactions from his account. This goal is achieved through identity validation of the transactor in the form of photo verification. In this way the user can detect a suspicious transaction and therefore protect herself or himself from a fraud or online theft.
+
+This chapter concentrates on the implementation of photo verification to create a safe payment gateway and protect the user from online frauds. All the techniques and methods used to bring this project to life are enlisted in this chapter from the front end through which the user interacts with the web app and the back end where all the processes of form validations, photo capturing and verification occur.
+
+This chapter contains various flowcharts and diagrams to get an overview and explain the methodology and overall working of the project in a simplified way
+
+Further, the screenshots of the web application in working are attached to get a passive perspective of the working of the web app along with the written explanation of every picture right below.
+
+Online scams are a problem of grave concern and puts the hard earned income of an individual at the risk of theft. This project would prove to be a safe gateway which would thwart any such attempt of theft or scam and keep the owner notified of every such access on his account.
+\pagebreak
+
+\subsection{Case Diagram}
+\vspace{2cm}
+\begin{figure}[H]
+\begin{center}
+\hspace*{-0.9in}
+\includegraphics[width=1.3\textwidth]{Figure3.png}\\
+\caption{Use Case Diagram}
+\label{fig:Figure 3}
+\end{center}
+\end{figure}
+
+\begin{center}
+The above figure shows the use of Case diagram for the web application.
+\end{center}
+
+\pagebreak
+
+\subsection{List of main Classes under Use Cases}
+\vspace{0.5cm}
+\begin{enumerate}
+    \itemsep0em
+    \item Get\_input()
+    \item Authenticate()
+    \item Send\_mail()
+    \item mongo\_data()
+    \item cookies()
+\end{enumerate}
+
+\subsection{Class Diagram}
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\textwidth]{Classes.png}\\
+\caption{Use Class Diagram}
+\label{fig:Figure 4}
+\end{center}
+\end{figure}
+
+\begin{center}
+The above diagram shows the Class Diagram from Use Cases.
+\end{center}
+
+\pagebreak
+
+\subsection{Method of Implementation}
+\vspace{0.5cm}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.7\textwidth]{Implementation.png}\\
+\caption{Flowchart of Application}
+\label{fig:Figure 5}
+\end{center}
+\end{figure}
+
+The above figure shows the brief working of the application in pictorial form.
+
+
+\pagebreak
+
+\subsection{Front End Development}
+\vspace{0.5cm}
+\subsubsection{Login Page}
+This is the first page the user interacts with. It is elegant in design yet simple to use. It contains input boxes for username and password, a link to the sign up page and a submit button.
+
+\subsubsection{Sign-up Page}
+The sign up page is similar to the login page. It has three input boxes for the username, password and email and a submit button.
+
+\subsubsection{Payment Details Page}
+Here the user enters the details of the benefactor of the transaction. It contains input boxes for payee name, account number, IFSC code and the amount to be transferred. At the end there is a submit button which takes the user to the webcam page.
+
+\subsubsection{Webcam Page}
+As the page opens, the site asks the user to allow access to his/her webcam. The user can see his live image in this page on the left box. There are two buttons, namely Capture and Submit. Capture captures the image and displays it in the right box. Then submit sends the user to the waiting page.
+
+\subsubsection{Waiting Page}
+As the name suggests, this page is built for the user to wait for another process to complete. It has a graceful animated gif of an email and says 'Email has been sent on top'.
+
+\subsubsection{Verify Page}
+This page is served to the end user through an email link. It contains the details of the payment, picture of the transactor, a form with three bullet points and button saying verify. The options given are to verify or decline the payment, or reset the password.
+
+\subsubsection{Password Reset Page}
+This page is for the end user too, to change his/her  password. It is a form with three input boxes for the old password, new password and to re enter the new password. It has a submit button at the end.
+
+\subsubsection{Confirmed Page}
+This page is meant for both the transactor and the account owner indicating the correct completion of task.
+
+\subsubsection{Declined Page}
+This page is served to the transactor and the end user when their request is declined.
+
+\subsubsection{Error Page}
+This page is only for the transactor when request times out. It has a nice animation and shows the 404 error code.
+
+\subsection{Backend Development}
+\vspace{0.5cm}
+The whole methodology of the project is carried out by the backend. When the user logs in, the database is checked for those credentials and the user is allowed access to the pages further in. A cookie is stored in the browser to identify the user throughout the payment. At the webcam page, the picture of the transactor along with the details of the payment are stored in the database as a transaction request. This information is then extracted to display it to the end user via email. The end user validates the payment which updates the payment status on the database. This database is then checked on the transactor's side to show him/her the status of the payment. Then the tokens for login and email session are erased so they cannot be accessed again without placing another request.
+
+To ensure the safety of the transaction and secure mapping of a transaction to an email, the following token authentication methods have been used:
+
+\subsubsection{Login Token}
+When the user enters the correct credentials, a random hundred character long token is assigned to the transaction and stored in the cookies and the database for their communication. When any page is accessed, the backend checks if there is a record present in the database corresponding to the login token in the cookies. If yes, access in granted, otherwise the user has to log in again. At the end of the transaction, the login token in database is changed to 'logged-out' and is further deleted from the cookies. So a login token is usable only once and its value changes every time making a secure login system.
+
+\subsubsection{Email Session Token}
+Another concern is to bind an email with a transaction so that it can only affect that particular transaction and is rendered useless after one use. This is achieved by another token for the email. When the mail is sent, a token is sent in the verification link of the email as a query. When the link on the email is clicked, the backend checks for a record in the database for the token. Only if it finds an active record in the database(where payment is still pending), does it give access to the email, otherwise it shows that this session has expired. After the email has been verified, the session token is changed to 'logged-out' and that email cannot access that record thereafter.\\
+
+Apart from this, the full details of every transaction are stored in the database which can be accessed by the bank in case of a fraud. The end user also has the picture of every transactor in her/his emails.
+
+\pagebreak
+
+\begin{center}
+
+\vspace{1cm}
+The below figure shows the backend processes of the web app.
+\end{center}
+
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Figure4.png}\\
+\caption{Backend Flowchart}
+\label{fig:Figure 6}
+\end{center}
+\end{figure}
+
+\pagebreak
+
+
+\subsection{Test and Results}
+\vspace{0.5cm}
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Login.png}\\
+\caption{Login Page}
+\label{fig:Figure 7}
+\end{center}
+\end{figure}
+
+This is the first page of the website. Here the user enters her/his login credentials to log in.
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Payment.png}\\
+\caption{Payment Details Page}
+\label{fig:Figure 8}
+\end{center}
+\end{figure}
+
+After logging in, the transaction details of the benefactor are entered.
+
+\pagebreak
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Webcam.png}\\
+\caption{Webcam Page}
+\label{fig:Figure 9}
+\end{center}
+\end{figure}
+
+The transactor clicks his/her picture by clicking the button on the left. It is then submitted for verification by the submit button on the right.
+
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=0.7\textwidth]{Email.png}\\
+\caption{Received email}
+\label{fig:Figure 10}
+\end{center}
+\end{figure}
+
+This is the email received by the end user. It contains the details of the payment along with the picture of the transactor.
+
+\pagebreak
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=0.7\textwidth]{Verify.png}\\
+\caption{Verification Page}
+\label{fig:Figure 11}
+\end{center}
+\end{figure}
+
+The verify link in the email leads to this page. Here the account owner can select any of the three options for the ongoing transaction.
+
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Reset.png}\\
+\caption{Password Reset Page}
+\label{fig:Figure 12}
+\end{center}
+\end{figure}
+
+If the end user chooses to reset her/his password, she/he is directed to this page. User enters the old password and the new password to change the login password.
+
+\pagebreak
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Declined.png}\\
+\caption{Payment Declined Page}
+\label{fig:Figure 13}
+\end{center}
+\end{figure}
+
+As the end user chose reset password, the ongoing payment is declined and the transactor sees this page. Had the end user chosen 'Decline payment', the transactor would still have received the same page.
+
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Confirmed.png}\\
+\caption{Request Confirmed Page}
+\label{fig:Figure 14}
+\end{center}
+\end{figure}
+
+After the end user has completed the verification process, he is taken to the confirmation page given above.
+
+\pagebreak
+
+\textbf{Exploring other options:}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Successful.png}\\
+\caption{Payment Successful Page}
+\label{fig:Figure 15}
+\end{center}
+\end{figure}
+
+If the end user confirms the payment, the transactor is taken to this page.
+
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Expired.png}\\
+\caption{Session Expired Page}
+\label{fig:Figure 16}
+\end{center}
+\end{figure}
+
+If the end user opens the link in an email which has already verified a payment, the above page opens showing that the session has already expired.
+
+\pagebreak
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Error.png}\\
+\caption{Payment Timed Out Page}
+\label{fig:Figure 17}
+\end{center}
+\end{figure} 
+
+If the end user does not reply to the email within three minutes of sending the mail, the payment is canceled automatically and the transactor sees this page.
+
+\vspace{0.7cm}
+
+\begin{figure}[H]
+\begin{center}
+%\hspace*{-0.1in}
+\includegraphics[width=1\textwidth]{Atlas.png}\\
+\caption{Transaction stored in database}
+\label{fig:Figure 18}
+\end{center}
+\end{figure} 
+
+As already mentioned, every transaction is stored in mongo atlas database. The above figure shows the document for the transaction carried out above.
+
+
+
+\pagebreak
+
+%Chapter 4
+\begin{Large}
+\begin{center}
+\textbf{CHAPTER\\
+\section{CONCLUSION AND FUTURE DIRECTIONS}}\\
+\line(1,0){300}\\
+\end{center}
+\end{Large}
+\vspace{0.5cm}
+\subsection{Conclusion}
+Online scams have penetrated almost every aspect of businesses and services and its origin itself lies with the advent of digitalisation of these amenities. Millions all around the world are victimized by fraudsters every single day bringing about loss of prodigious amount of finances. The ever increasing popularity of online gateways for transactions, payments, shopping, etc,. is one of the prime pull factors for fraudsters to carry out such felonies. To detect such frauds and scams is yet another strain due to fraudsters adapting to the newer countermeasures designed to throw them out. Although this report does not focus on putting a stop on online crimes altogether, it does present an ingenious strategy to safeguard the general public from such frauds in one mode. Photo verification is an uncomplicated, facile yet reliable and adaptable solution to the problem discussed above. It is the right blend of technology and the key element of human intervention assuring its solidity.
+
+This chapter of the report discusses the overall purpose of the system of securing transactions, limitations of the project and its scope in the future. Online scams are a serious problem but are unexpectedly understudied. These frauds disturb the economic working of the world and disrupts the interaction of the systems within. These scams have broad social impacts like loss of trust in people, commerce or government institutions. It may instil fear and loss of confidence in the commercial markets. They also impact the mental well-being of the victim and exert negative impacts on self-esteem and relationship with others.
+
+The method discussed in this report relies on human intelligence and therefore would prove trustworthy unlike models using machine learning which are dependent on the nature of the limited amount of dataset fed to them. This ingredient of human involvement is what distinguishes this model from the ones already present. It could further be improved for a broader range of application if given the right direction.
+
+\pagebreak
+
+\subsection{Limitations and Future Directions}
+\vspace{0.5cm}
+\subsubsection{Limitations}
+Although the model given in this report proves to be effective, it is limited regarding the relief it provides to the underlined problem. The prime limitation is the range of devices which can run this system of verification. As this involves taking the picture of the transactor at the time of transaction, only devices with a camera like phone, laptops and desktops with webcams could run this model. Many desktop users may not have a webcam with their computer and therefore would be unable to verify themselves during payments. Apart from the availability, factors like the quality of camera and internet connection also affect the performance.
+
+Another limitation of this project is the place and time of the person making a payment. A clearly recognizable picture would require good lighting conditions, preferably during the day or external lighting at night. Now if the transactor is not at a suitable place, it could affect the effectiveness of the model.
+
+Even though this project is designed to keep fraudsters at bay, they are brisk at adapting to the countermeasures planted against them. In this case, tampering with the picture may bring down the efficacy of the system. Acts like covering the camera or holding a picture of someone else in front of it could make it impossible for the account holder to identify the transactor or even effectively trick him/her into validating the payment resulting in a fraud.
+
+\subsubsection{Future Directions}
+ This project aims to solve the problem of scams involving online transactions by the conscious presence of human judgement. As the pressure on the system increases, the project could be moulded with the help of technology to display faster handling while on the same time, not compromising with the reliability of the model.
+ 
+ To handle a large amount of traffic due to multiple people accessing data servers of some organizations, the system can be combined with an AI model for facial recognition, to itself verify the transactor and thereby allow or decline access. The facial recognition could be used with photo verification by a human to make sure that the person submitting the picture is actually present in front of the camera and is not holding a picture of someone the account holder may trust. This could be achieved using an AI which tracks specific points of the face to detect eye blinks, stretching of the skin, etc., to confirm that the feed being given to the webcam is live. This system could be trained to sharpen the image according to the surrounding for better recognition. With the consent of the user, the AI could be trained the behavioral patterns conveyed by the transactor to learn the general behaviour of a genuine user and a fraud.
+ 
+ Although this project was made to create a safe payments gateway, its implementation runs beyond that. As already explained in previous chapters, this model could be used to safeguard data from unauthorised access by situating this system at login or sign-in pages of a company.
+ 
+ Another direction this project can take is safeguarding users' accounts on different platforms on the internet. If this system of verification is applied on login pages of social media sites, the genuine user would know if someone is trying to access the internet with their identity. It would therefore provide immunity against identity theft cases.
 
 
 \pagebreak
