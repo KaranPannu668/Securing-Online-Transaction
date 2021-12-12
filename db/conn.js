@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.LOCALHOST,{
+mongoose.connect(process.env.MONGOATLAS,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //useCreateIndex: true,
