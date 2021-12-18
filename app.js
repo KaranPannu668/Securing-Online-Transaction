@@ -157,7 +157,7 @@ app.post("/sign-up", async function(req, res){
 app.get("/payment", async function(req, res){
     try{
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token});
-        if(login_token)
+        if(login_token && req.cookies.login_token !='logged-out')
         {
             res.render("practicum-payment",{acc_name_p : acc_name , err_msg_no_p : err_msg_no_p , err_msg_amount_p : err_msg_amount_p , acc_no_p : acc_no , err_msg_code_p : err_msg_code_p , IFSC_p : IFSC , amount_p : amount});
             acc_name="";
@@ -183,7 +183,7 @@ app.get("/payment", async function(req, res){
 app.post("/payment", async function(req, res){
     try{
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-        if(login_token)
+        if(login_token && req.cookies.login_token !='logged-out')
         {
             const _id = login_token.userid;
             const user_username = await Register.Register.findOne({_id : _id});
@@ -259,7 +259,7 @@ app.post("/payment", async function(req, res){
 app.get("/webcam", async function(req, res){
     try{
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-        if(login_token)
+        if(login_token && req.cookies.login_token !='logged-out')
         {
             if(req.query.name == "" || req.query.account == "" || req.query.IFSC == "" || req.query.amount == "")
             res.redirect("/payment");
@@ -280,18 +280,19 @@ app.get("/webcam", async function(req, res){
 app.post("/webcam", async function(req, res){
     try{
     const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-    if(login_token)
+    if(login_token && req.cookies.login_token !='logged-out')
     {
         const img64 = req.body.Image64bit;
         const account_no = req.query.account;
         const user_username = await Register.Register.findOne({_id : login_token.userid});
         const request_id = login_token._id;
         const secret_session_token = generateToken(100);
-        await Register.Request.updateMany({_id : login_token._id} , {$set : {session_token : secret_session_token , payee_name : req.query.name , account_no : req.query.account , IFSC : req.query.IFSC , amount : req.query.amount , status : "pending" , image : img64}});
+        await Register.Request.updateMany({_id : login_token._id} , {$set : {session_token : secret_session_token , payee_name : req.query.name , account_no : req.query.account , IFSC : req.query.IFSC , amount : req.query.amount , image : img64}});
         payment_secret_token = generateToken(100);
         const email_verify_port = req.protocol + "://" + req.get('host') + "/verify?token=" + secret_session_token + "&id=" + login_token._id;
         sendEmail(img64, user_username.email , req.query.amount , account_no.substring((req.query.account).length - 4) , email_verify_port);
-        res.redirect("/waiting?count=1");
+        res.cookie("count", 1 , {maxAge: 1200000, httpOnly: true, secure: true, sameSite : 'lax'});
+        res.redirect("/waiting");
         // var a = 0;
         // let received_request;
         // let payment_status = "pending";
@@ -339,9 +340,9 @@ app.post("/webcam", async function(req, res){
 app.get("/waiting" , async function(req , res){
     try{
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-        if(login_token)
+        if(login_token && req.cookies.login_token !='logged-out')
         {
-            res.render("waiting" , {queries : "count=" +req.query.count});
+            res.render("waiting");
         }
         else
         res.redirect("/?err=*Please log in first");
@@ -356,15 +357,15 @@ app.get("/waiting" , async function(req , res){
 app.post("/waiting" , async function(req , res){
     try{
         const login_token = await Register.Request.findOne({login_token : req.cookies.login_token})
-        if(login_token)
+        if(login_token && req.cookies.login_token !='logged-out')
         {
-            var count = parseInt(req.query.count , 10);
+            var count = parseInt(req.cookies.count , 10);
             const request_id = login_token._id;
             if(count <= 10)
             {
                 var a = 0;
                 let received_request;
-                let payment_status = "pending";
+                let payment_status;
                 while(a<=20)
                 {
                     received_request = await Register.Request.findOne({_id : request_id});
@@ -396,7 +397,8 @@ app.post("/waiting" , async function(req , res){
                 return;
             }
             count = count+1;
-            res.redirect("/waiting?count=" + count.toString());
+            res.cookie("count", count , {maxAge: 1200000, httpOnly: true, secure: true, sameSite : 'lax'});
+            res.redirect("/waiting");
             
         }
         else

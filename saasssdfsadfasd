@@ -1,0 +1,523 @@
+[33mcommit da99f91224ea603b53d218d2e00b27c9025f71f7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;31mheroku/master[m[33m)[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Dec 16 14:35:33 2021 +0530
+
+    Minor fix
+
+[33mcommit 86f8bfda1876c871ecbb9ba7c720aee5a18f8110[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sun Dec 12 22:44:11 2021 +0530
+
+    Minor fix
+
+[33mcommit 568d0cd33e5d0d0d8f5349322280ce491cc88190[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sun Dec 12 22:42:53 2021 +0530
+
+    Security Update
+
+[33mcommit 131181ec539f5bf8e2d225a044d84e2bd223e75f[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Dec 8 11:25:19 2021 +0530
+
+    Cumulative report
+
+[33mcommit b4bed01219d7237f873c37b433dc9b25800fb5dc[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Dec 8 00:01:38 2021 +0530
+
+    Uploaded Report
+
+[33mcommit cf34c74e9cd799557243521595bcfb1c44714db1[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Dec 1 20:32:45 2021 +0530
+
+    Minor bug fix
+
+[33mcommit e24b913c6c6aad13977f309241afd0b688b7b383[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Dec 1 17:52:53 2021 +0530
+
+    Fixed some bugs
+
+[33mcommit df6e966f7268e70152c5fbedbc4327031965e902[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Nov 26 12:37:20 2021 +0530
+
+    Minor change
+
+[33mcommit b215ac552d9ab082f7676b37093f645dfc43865c[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Nov 26 11:36:16 2021 +0530
+
+    minor changes
+
+[33mcommit c332d67b248d7b68cabb824000b52ba739262580[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Nov 26 11:30:54 2021 +0530
+
+    Minor changes
+
+[33mcommit 70b0577158ddbd3899fccff221be8c31f3592a15[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Nov 26 11:29:31 2021 +0530
+
+    Mods for Heroku
+
+[33mcommit 2dd1051e4d28ce518bd19adf496f083909cdf8ee[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sun Nov 21 20:32:48 2021 +0530
+
+    Minor updates
+
+[33mcommit 4bca632691be5bb978149acc66fc7933d5e1ce16[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sun Nov 21 20:28:20 2021 +0530
+
+    Minor updates
+
+[33mcommit ebb33d7dbec94a80f16185e6567318765cb1108e[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sat Nov 20 20:11:40 2021 +0530
+
+    Minor changes
+
+[33mcommit 83961d124031373d94deaa3d04af4cd0a75f30f7[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sat Nov 20 20:02:09 2021 +0530
+
+    Minor changes
+
+[33mcommit 2156ae5322666ebb235515c15b09bf4966e5792c[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sat Nov 20 18:59:46 2021 +0530
+
+    Minor changes
+
+[33mcommit 3881a9663e31ad90100fee7f6a0244feca987764[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sat Nov 20 13:16:01 2021 +0530
+
+    Created transaction history
+
+[33mcommit 5d6e14621caa1333efc33593f081214330c46e4d[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Nov 19 23:59:36 2021 +0530
+
+    Added cookies and db
+
+[33mcommit 60ab9d65570605ebf757bd28b64b2e7e05343292[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 19:13:23 2021 +0530
+
+    Update
+
+[33mcommit 8b6b7cda41435638bcf0c1442fb82c3ede83cef6[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 19:09:55 2021 +0530
+
+    update
+
+[33mcommit 3844f4cf4b2784b8e4b752de869cde0b2ef18136[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 19:04:40 2021 +0530
+
+    UPDATE
+
+[33mcommit 1fe8a9db790df674e0cf7943c43bb5d4ef4d0cc5[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 18:55:46 2021 +0530
+
+    env to heroku config
+
+[33mcommit 2e6ff4110cc53b24fcb9d055aac735ae975c6cb1[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 18:40:33 2021 +0530
+
+    Update conn.js
+
+[33mcommit 2d9d97844aed2c0bdaac48d6abda252112d54fde[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 18:34:03 2021 +0530
+
+    Update conn.js
+
+[33mcommit 0b7bd5b55f95cc3eca0ce318897b328d76a5b48f[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 18:16:48 2021 +0530
+
+    Update .gitignore
+
+[33mcommit 8f34e45fa3ebb1371b9e2ec8b4e4013290bd0ae0[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 17:37:57 2021 +0530
+
+    Minor changes
+
+[33mcommit 94ae132353032345b99e88f0670fe1ba02d989eb[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 17:26:46 2021 +0530
+
+    Verify by href
+
+[33mcommit fd06b77eac80c62295369d0a82433c34152adf3a[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Thu Nov 18 12:43:52 2021 -0500
+
+    bug fixes
+
+[33mcommit f37eb5b1a921dc0f39eda973b6224d27396f7780[m
+Merge: 0404f01 974a914
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 12:37:28 2021 +0530
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit 0404f015c551eca65e5337e402343709c5541bde[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Thu Nov 18 12:37:21 2021 +0530
+
+    Removed localhost port
+
+[33mcommit 974a9140f90105b85358693648e8adf86c96cb66[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 22:40:57 2021 -0500
+
+    Bug Fixed
+
+[33mcommit 96dbf75563924ebff0ec6f34b7fd7123c8b5fb82[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 22:34:46 2021 -0500
+
+    Bug fix
+
+[33mcommit 8a5792fed2834e46d8cdf2e8f06ecb5129541733[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 22:09:44 2021 -0500
+
+    Bug Fixes
+
+[33mcommit f0e624c810ea829fca4997c2cb03f9739494fb4e[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 21:50:43 2021 -0500
+
+    Bug Fixes
+
+[33mcommit 0c1afa943125d10c1a75ef60c6b48d69b5ca6d89[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 21:39:54 2021 -0500
+
+    Bug fixes
+
+[33mcommit d75b3d1b5eba7b1ffe8574c11fc23309e4b271fb[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 21:20:07 2021 -0500
+
+    Final touch
+
+[33mcommit 7248d5e1ecb0c6801ec314a08b3847cd850de70b[m
+Merge: 80661d7 fda5c5f
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Nov 17 19:44:00 2021 +0530
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit fda5c5fc55d3c044b8850c6139edce8bbe92fd49[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Nov 17 19:21:40 2021 -0500
+
+    Bug fixes
+
+[33mcommit 80661d76d92ff1072049ae6079b8df0fba8b962c[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Nov 17 19:43:55 2021 +0530
+
+    Removing similar usernames
+
+[33mcommit dc65d479eb87cf871bd47aebfb113cca7bfc109d[m
+Merge: fbfab42 971248c
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Nov 17 00:19:49 2021 +0530
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit fbfab422967f6eec2d08f04c7a21f3c698337828[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Nov 17 00:14:18 2021 +0530
+
+    Working achieved
+
+[33mcommit 971248c9450baca3d4cce26ebd5aa506448529cc[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Mon Nov 15 18:51:55 2021 -0500
+
+    some change
+
+[33mcommit ca2842144d04066764c9f70aa912fa45324881cd[m
+Merge: fa1a2a8 44e3a83
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Nov 14 19:18:32 2021 -0500
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit fa1a2a82fa2b8c7b12c1fb01ffd83d7268d570e4[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Nov 14 19:18:16 2021 -0500
+
+    Waiting page added
+
+[33mcommit 8330f3d2c0944daee7afd71151e28ba8be86bede[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Nov 14 10:17:08 2021 -0500
+
+    Update webcam.css
+
+[33mcommit 5591a4e3a005eb2908933ba2ae2a610ada8eb891[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Nov 14 20:38:35 2021 -0500
+
+    Some changes
+
+[33mcommit 44e3a8321f52d66e87105ed67be0dbec58365105[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Sun Nov 14 14:01:18 2021 +0530
+
+    Add files via upload
+
+[33mcommit ff2bd46bb2dbe7ec0ec42ba2871d4111bc074e82[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Sun Nov 14 14:00:53 2021 +0530
+
+    Add files via upload
+
+[33mcommit 805173af466e7307a6c4ba26c2348e48bcd04678[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Sun Nov 14 14:00:23 2021 +0530
+
+    Add files via upload
+
+[33mcommit cc109e7dfa605582a8a5ef00c43973647e71035c[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Sun Nov 14 13:58:24 2021 +0530
+
+    Add files via upload
+
+[33mcommit 5804d855aae3df770945a372ec6bf09ee0cde1f1[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Sun Nov 14 13:57:41 2021 +0530
+
+    Add files via upload
+
+[33mcommit db07e4f8cad0aa32d8f2860e1a5248098ec40ad9[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sat Nov 6 17:56:53 2021 -0400
+
+    Webcam Final
+
+[33mcommit 97bd92fdbef25b113b9c16a0269634757a50398d[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Sat Nov 6 20:36:52 2021 +0530
+
+    Joined webcam to backend
+
+[33mcommit d8f332daf191225dd6104a8fbb86136307ebfee4[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Nov 2 15:46:33 2021 -0400
+
+    Update webcam.html
+
+[33mcommit aa4ff6dc8f87f2a9dab658994f52bb2196f81456[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Mon Nov 1 09:29:39 2021 -0400
+
+    Update README.md
+
+[33mcommit c92b227baf6fc7a4b9622eee23064364a69cfae8[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Mon Nov 1 09:26:31 2021 -0400
+
+    Update README.md
+
+[33mcommit f611780d32283cf683df9ffc37767751925d063c[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 27 09:25:31 2021 +0530
+
+    Update conn.js
+
+[33mcommit 97aa0f4000284c6c2037d6ce72b15694cb30ffbb[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Wed Oct 27 09:16:57 2021 +0530
+
+    Shifted database to MongoDB Atlas
+
+[33mcommit 6f8b5cb7e6d0c1d4af74b92c855bc0deefda47ba[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Oct 17 20:12:22 2021 -0400
+
+    Failed Update
+
+[33mcommit 42f5352ea4eac7c5ee3b1c7bbb7401e192982330[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Sun Oct 17 10:33:08 2021 -0400
+
+    Update practicum-signup.ejs
+
+[33mcommit 5d65838a658df5de5f6c47200a47d1676d2299e0[m
+Merge: 52a9879 5a43c84
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Oct 15 12:11:09 2021 +0530
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit 52a9879c2ce97f9b592a610345b89aea04c29e6c[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Fri Oct 15 12:11:03 2021 +0530
+
+    Added from validation error messages
+
+[33mcommit 5a43c844bc22225245760ba5f0cfbb009ccdf945[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 20:25:44 2021 +0530
+
+    Update 12011026_Report.tex
+
+[33mcommit 604f05ef98019434b1854131e57347dd7523180e[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 20:24:44 2021 +0530
+
+    Update 12011011_Report.tex
+
+[33mcommit fc3e40782b1eb9f83699c2187260a3bc1dd8a45d[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 20:23:08 2021 +0530
+
+    Update 12011009_Report.tex
+
+[33mcommit a2b74d17005c9d9dcf75eca36a636a30d65bf43b[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Oct 13 10:30:56 2021 -0400
+
+    update ui for webcam
+
+[33mcommit e37c01fa6fa00f7ddc6a3a9459c959224d1a0e99[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Oct 13 10:29:46 2021 -0400
+
+    Update webcam.html
+
+[33mcommit 5829f1adca470c0fdf662ffafa70233da339a718[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Oct 13 10:29:09 2021 -0400
+
+    Minor update
+
+[33mcommit f3d5a6718361d5c43bb8b41e4e8906071bd71269[m
+Merge: 3d9f417 13876e6
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Oct 13 09:12:03 2021 -0400
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit 3d9f417c5120f4ba889f5bc0c8c58f42ef748506[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Wed Oct 13 09:11:59 2021 -0400
+
+    Update webcam.html
+
+[33mcommit 5631683294d040ad2c5937abaffa8cf7f2dec39e[m
+Merge: 19b7d9f 0669b70
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Oct 12 16:19:40 2021 -0400
+
+    Merge branch 'master' of https://github.com/Akshdeep792/Securing-Online-Transaction
+
+[33mcommit 19b7d9f9e140987b6249825459985baddc66e601[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Oct 12 16:18:06 2021 -0400
+
+    v 2.1.0
+    
+    Name change
+
+[33mcommit 158184a4e216f1a6286efd9aa7eaac4bdf1a4e37[m
+Author: Akshdeep792 <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Oct 12 16:02:58 2021 -0400
+
+    v2.0.0
+    
+    Completed webcam part
+
+[33mcommit 13876e6d32e3ee3e5f0faa8c9922d72d0e6e765b[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 00:05:11 2021 +0530
+
+    Update README.md
+
+[33mcommit f66be30df9b2a9458cb310fafb05ba939c963fb8[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 00:03:21 2021 +0530
+
+    Update README.md
+
+[33mcommit 6c83206503b917dcdd105b77adc410f167b9f06c[m
+Author: KaranPannu668 <67629214+KaranPannu668@users.noreply.github.com>
+Date:   Wed Oct 13 00:02:36 2021 +0530
+
+    Update README.md
+
+[33mcommit 2a0e5cc8cb2886a3f17c9bb87417ff2a027fd389[m
+Author: KaranPannu668 <karanpannu668@gmail.com>
+Date:   Tue Oct 12 23:54:07 2021 +0530
+
+    Added transaction and webcam page to backend
+
+[33mcommit 0669b706cd596d1ee81c4d4918087552098b3dcb[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Oct 12 06:48:23 2021 -0400
+
+    Update README.md
+
+[33mcommit 7c20a23976de17e9ee0b1c257575a0585f61f904[m
+Author: Akshdeep Singh <76034766+Akshdeep792@users.noreply.github.com>
+Date:   Tue Oct 12 04:06:37 2021 -0400
+
+    Update README.md
+
+[33mcommit 2a02ac0beeec689899809dd7f9ed75b82834bf75[m
+Merge: d9f3476 74897b6
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Tue Oct 12 11:43:49 2021 +0530
+
+    Merge pull request #5 from Akshdeep792/harshbokan-patch-4
+    
+    Payment gateway
+
+[33mcommit 74897b61b84ec7e9df826a9d1c1473273399b140[m[33m ([m[1;31mupstream/harshbokan-patch-4[m[33m, [m[1;31morigin/harshbokan-patch-4[m[33m)[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Tue Oct 12 11:43:27 2021 +0530
+
+    Add files via upload
+
+[33mcommit d9f3476eb4ae589a1281c03af690f68f69516a66[m
+Merge: d1b143c 8955238
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Tue Oct 12 11:42:13 2021 +0530
+
+    Merge pull request #4 from Akshdeep792/harshbokan-patch-3
+    
+    payment gateway
+
+[33mcommit 8955238344d355612383615429ab72eebb9ba0af[m[33m ([m[1;31mupstream/harshbokan-patch-3[m[33m, [m[1;31morigin/harshbokan-patch-3[m[33m)[m
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Tue Oct 12 11:41:44 2021 +0530
+
+    Add files via upload
+
+[33mcommit d1b143ca2b73a64c55097b8c8902269c287cc4b1[m
+Merge: 2587860 d6f3f37
+Author: harshbokan <76042557+harshbokan@users.noreply.github.com>
+Date:   Mon Oct 11 20:08:10 2021 +0530
+
+    Merge pull request #3 from Akshdeep792/harshbokan-patch-2
+    
+    Update practicum-signup.css
